@@ -25,8 +25,22 @@ public class Matrix {
      * Get's the height of the matrix.
      * @return number of rows in matrix
      */
+    
     public int getHeight() {
         return matrix.length;
+    }
+    /**
+     * Gets value located at specified row and column
+     * @param i row
+     * @param j column
+     * @return double located at row i and column j in matrix
+     */
+    public float get(int i, int j) throws MatrixIndexOutOfBoundsException {
+        if (i >= width || j >= height) {
+            throw new MatrixIndexOutOfBoundsException("Index Out of Bounds");
+        } else {
+            return matrix[i][j];
+        }
     }
     /**
      * Gets the width of the matrix.
@@ -49,5 +63,22 @@ public class Matrix {
             aString = aString + "\n";
         }
         return aString;
+    }
+    /**
+     * Multiplies two matrices FOR POWER METHOD because it assumes that
+     * the matrices are both n x n.
+     * @param a
+     * @param b
+     * @return
+     */
+    public Matrix multiply(Matrix a, Matrix b) {
+        float[][] ma = new float[a.getHeight()][a.getWidth()];
+        for(int i = 0; i < a.getHeight(); i++) {
+            for (int j = 0; j < a.getWidth(); j++) {
+                //code needed but duy has to go to class
+            }
+        }
+        Matrix temp = new Matrix(ma);
+        return temp;
     }
 }
