@@ -75,10 +75,11 @@ public class Matrix {
         float[][] ma = new float[a.getHeight()][a.getWidth()];
         for(int i = 0; i < a.getHeight(); i++) {
             for (int j = 0; j < a.getWidth(); j++) {
-                //code needed but duy has to go to class
+                ma[i][j] = a.get(i, j) * b.get(j, i);
             }
         }
         Matrix temp = new Matrix(ma);
         return temp;
+        //think this is right, could be wrong
     }
 }
