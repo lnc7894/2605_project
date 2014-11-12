@@ -1,3 +1,4 @@
+import java.util.Scanner;
 import java.util.Vector;
 
 
@@ -14,5 +15,42 @@ public class mathproject {
             
             //need to add in judy's files for matrix multiplication etc.
         }
+    }
+    
+    public void gn_qua() { //not void, just void for now
+        Scanner scan = new Scanner(System.in);
+        //forgot how to do text files
+        
+        //prompt user for guesses
+        System.out.println("Enter initial guesses for a, b, c");
+        float a = scan.nextFloat();
+        float b = scan.nextFloat();
+        float c = scan.nextFloat();
+        
+        // get number of iterations
+        System.out.println("Enter number of iterations");
+        int iter = scan.nextInt();
+    }
+    
+    public void gn_exp() {
+        
+    }
+    
+    public void gn_log() {
+        
+    }
+    
+    public void gn_rat() {
+        
+    }
+    
+    public float[][] qr_fact_househ(float[][] matrix) {
+        
+        return null;
+    }
+    
+    public float[][] qr_fact_givens(float[][] matrix) {
+        
+        return null;
     }
 }
