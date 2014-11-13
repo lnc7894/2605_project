@@ -45,7 +45,7 @@ public class mathproject {
     }
     
     public float[][] qr_fact_househ(float[][] matrix) {
-        //need determinant
+        //need norm
         return null;
     }
     
@@ -54,6 +54,7 @@ public class mathproject {
         return null;
     }
     
+    //okay so i thought i needed this but probably not but if we need it later here we go
     public float determinant(float[][] matrix) {
         float det = 0;
         if (matrix.length != matrix[0].length) {
@@ -73,6 +74,12 @@ public class mathproject {
             // do stuff
         }
         return det;
+    }
+    
+    // was making this for householder and was going to do first column, but should we do this for vectors as well?
+    public float norm(float[][] matrix) {
+        float norm = 0;
+        return norm;
     }
     
 }
