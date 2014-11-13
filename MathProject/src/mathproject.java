@@ -45,12 +45,20 @@ public class mathproject {
     }
     
     public float[][] qr_fact_househ(float[][] matrix) {
-        
+        //need determinant
         return null;
     }
     
     public float[][] qr_fact_givens(float[][] matrix) {
         
         return null;
+    }
+    
+    public float determinant(float[][] matrix) {
+        // when 2x2
+        
+        // when 3x3 and up
+        
+        return 0;
     }
 }
