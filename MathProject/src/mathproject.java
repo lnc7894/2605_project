@@ -55,10 +55,24 @@ public class mathproject {
     }
     
     public float determinant(float[][] matrix) {
+        float det = 0;
+        if (matrix.length != matrix[0].length) {
+            return Float.MAX_VALUE; // not sure if we should throw an exception or not
+        }
         // when 2x2
+        if (matrix.length == 2 && matrix[0].length == 2) {
+            float a = matrix[0][0];
+            float b = matrix[0][1];
+            float c = matrix[1][0];
+            float d = matrix[1][1];
+            det = 1/((a*d) - (b*c));
+        }
         
         // when 3x3 and up
-        
-        return 0;
+        if (matrix.length > 2 && matrix[0].length > 2) {
+            // do stuff
+        }
+        return det;
     }
+    
 }
