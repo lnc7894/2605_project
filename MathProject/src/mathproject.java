@@ -7,10 +7,37 @@ public class mathproject {
 	 * @param epsilon
 	 * @param iterations
 	 */
-    public void power_method(double[][] matrix, double[] vector, double epsilon, int iterations) {
-    	Array2DRowRealMatrix a = new Array2DRowRealMatrix(matrix);
-    	ArrayRealVector v = new ArrayRealVector(vector);
-    	ArrayRealVector y = v;
+    public PowerReturn power_method(double[][] matrix, double[] vector, double epsilon, int iterations) {
+    	RealMatrix a = new Array2DRowRealMatrix(matrix);
+    	RealVector v = new ArrayRealVector(vector);
+    	RealVector y = v;
+    	RealMatrix b = a;
+    	RealVector prevV = v;
+    	double prevEvalue = 0;
+    	int numIterations = 0;
+    	for(int i = 1; i <= iterations; i++) {
+    	    b = b.multiply(a);
+            v = b.operate(y);
+        	double Evalue = v.dotProduct(y) / prevV.dotProduct(y);
+        	if (Evalue - prevEvalue <= epsilon & i > 1) {
+        		// when the method has worked
+        	    prevEvalue = Evalue;
+        	    numIterations = i;
+        	    prevV = v;
+        	    PowerReturn trieu = new PowerReturn(prevEvalue, numIterations, prevV); // method worked trieu = true
+        	    return trieu; // returns the necessary values
+        	} else {
+        		// for when more iterations are needed
+        	    prevEvalue = Evalue;
+        	    prevV = v;
+        	}
+        	if (i == iterations) {
+        		// for when the method has not worked and we have done the amount of iterations passed in
+        	    PowerReturn failure = new PowerReturn(-1);
+        	    return failure; //returns failure
+        	}
+    	}
+		return null; // should never reach this
     	
     }
     
