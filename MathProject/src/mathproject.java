@@ -1,4 +1,6 @@
 import org.apache.commons.math3.linear.*;
+
+import java.util.Random;
 public class mathproject {
 	/**
 	 * Power Method
@@ -40,16 +42,50 @@ public class mathproject {
 		return null; // should never reach this
     	
     }
-    
+
+    public void thousandGen() {
+        for (int i = 0; i < 1000; i++) {
+            Random rand = new Random();
+            double ii = rand.nextDouble() * 4 - 2;
+            double ij = rand.nextDouble() * 4 - 2;
+            double ji = rand.nextDouble() * 4 - 2;
+            double jj = rand.nextDouble() * 4 - 2;
+            double[][] matrix = {{ii, ij}, {ji, jj}};
+            double[] vector = {1, 0};
+            PowerReturn aReturn = power_method(matrix, vector, .00005, 100);
+            double absEValueMax = Math.abs(aReturn.getValue()); // this is part b bullet 2
+            matrix = inverse(matrix);
+            double absEValueMin = Math.abs(power_method(matrix, vector, .00005, 100).getValue()); // this is part b bullet 3
+        }
+    }
+
+    /**
+     * Finds Inverse of a 2x2
+     * @param matrix
+     * @return
+     */
+    private double[][] inverse(double[][] matrix) {
+        double det = matrix[0][0] - matrix[1][1];
+        double upleft = matrix[0][0];
+        double downright = matrix[1][1];
+        double upright = -1 * matrix[0][1];
+        double downleft = -1 * matrix[1][0];
+        matrix[0][0] = downright / det;
+        matrix[1][1] = upleft / det;
+        matrix[0][1] = upright / det;
+        matrix[1][0] = downleft / det;
+        return matrix;
+    }
+
     public void gn_qua() { //not void, just void for now
         Scanner scan = new Scanner(System.in);
         //forgot how to do text files
         
         //prompt user for guesses
         System.out.println("Enter initial guesses for a, b, c");
-        float a = scan.nextFloat();
-        float b = scan.nextFloat();
-        float c = scan.nextFloat();
+        double a = scan.nextdouble();
+        double b = scan.nextdouble();
+        double c = scan.nextdouble();
         
         // get number of iterations
         System.out.println("Enter number of iterations");
@@ -68,33 +104,33 @@ public class mathproject {
         
     }
     
-    public float[][] qr_fact_househ(float[][] matrix) {
+    public double[][] qr_fact_househ(double[][] matrix) {
         //need magnitude
-        float[] subMatrix = {matrix[1][1],matrix[2][1],matrix[3][1]};
-        float magSubMatrix = magnitude(subMatrix);
+        double[] subMatrix = {matrix[1][1],matrix[2][1],matrix[3][1]};
+        double magSubMatrix = magnitude(subMatrix);
         if (subMatrix[1] < 0) {
-            float[] subMatrixB = {subMatrix[1] + magSubMatrix, subMatrix[2], subMatrix[3]};
+            double[] subMatrixB = {subMatrix[1] + magSubMatrix, subMatrix[2], subMatrix[3]};
         }
         return null;
     }
     
-    public float[][] qr_fact_givens(float[][] matrix) {
+    public double[][] qr_fact_givens(double[][] matrix) {
         
         return null;
     }
     
     //okay so i thought i needed this but probably not but if we need it later here we go
-    public float determinant(float[][] matrix) {
-        float det = 0;
+    public double determinant(double[][] matrix) {
+        double det = 0;
         if (matrix.length != matrix[0].length) {
-            return Float.MAX_VALUE; // not sure if we should throw an exception or not
+            return Double.MAX_VALUE; // not sure if we should throw an exception or not
         }
         // when 2x2
         if (matrix.length == 2 && matrix[0].length == 2) {
-            float a = matrix[0][0];
-            float b = matrix[0][1];
-            float c = matrix[1][0];
-            float d = matrix[1][1];
+            double a = matrix[0][0];
+            double b = matrix[0][1];
+            double c = matrix[1][0];
+            double d = matrix[1][1];
             det = 1/((a*d) - (b*c));
         }
         
@@ -106,12 +142,12 @@ public class mathproject {
     }
     
     // was making this for householder and was going to do first column, but should we do this for vectors as well?
-    public float magnitude(float[] vector) {
-        float norm = 0;
+    public double magnitude(double[] vector) {
+        double norm = 0;
         for (int i = 0; i < vector.length; i++) {
             norm += Math.pow(vector[i], 2);
         }
-        return (float) Math.sqrt(norm);
+        return (double) Math.sqrt(norm);
     }
     
 }
