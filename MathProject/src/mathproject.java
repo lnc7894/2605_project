@@ -45,7 +45,12 @@ public class mathproject {
     }
     
     public float[][] qr_fact_househ(float[][] matrix) {
-        //need norm
+        //need magnitude
+        float[] subMatrix = {matrix[1][1],matrix[2][1],matrix[3][1]};
+        float magSubMatrix = magnitude(subMatrix);
+        if (subMatrix[1] < 0) {
+            float[] subMatrixB = {subMatrix[1] + magSubMatrix, subMatrix[2], subMatrix[3]};
+        }
         return null;
     }
     
@@ -77,9 +82,12 @@ public class mathproject {
     }
     
     // was making this for householder and was going to do first column, but should we do this for vectors as well?
-    public float norm(float[][] matrix) {
+    public float magnitude(float[] vector) {
         float norm = 0;
-        return norm;
+        for (int i = 0; i < vector.length; i++) {
+            norm += Math.pow(vector[i], 2);
+        }
+        return (float) Math.sqrt(norm);
     }
     
 }
