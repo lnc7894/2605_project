@@ -1,3 +1,4 @@
+import org.apache.commons.math3.linear.*;
 public class mathproject {
 	/**
 	 * Power Method
@@ -6,8 +7,11 @@ public class mathproject {
 	 * @param epsilon
 	 * @param iterations
 	 */
-    public void power_method(Matrix matrix, Vector vector, float epsilon, int iterations) {
-        //code
+    public void power_method(double[][] matrix, double[] vector, double epsilon, int iterations) {
+    	Array2DRowRealMatrix a = new Array2DRowRealMatrix(matrix);
+    	ArrayRealVector v = new ArrayRealVector(vector);
+    	ArrayRealVector y = v;
+    	
     }
     
     public void gn_qua() { //not void, just void for now
