@@ -8,22 +8,22 @@ public class Vector {
     /*
     Create final instance variables
     */
-    private final double[] vector;
+    private final float[] vector;
     private final int length;
     /**
      * Initialize instance variables
      * @param vector array representation of vector
      */
-    public Vector(double[] vector) {
+    public Vector(float[] vector) {
         length = vector.length;
         this.vector = vector;
     }
     /**
      * Gets value located at specified index
      * @param i index in vector
-     * @return double located at index 'i' in vector
+     * @return float located at index 'i' in vector
      */
-    public double get(int i) {
+    public float get(int i) {
 //        if (i >= vector.length) {
 //            throw new VectorIndexOutOfBoundsException("Index Out of Bounds!");
 //        } else {
@@ -34,7 +34,7 @@ public class Vector {
      * @return number of components in vector
      */
     public int getLength() {
-        return vector.length;
+        return length;
     }
     /**
      * String representation of vector with components

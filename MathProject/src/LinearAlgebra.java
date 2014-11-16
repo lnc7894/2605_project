@@ -1,5 +1,3 @@
-import java.util.Vector;
-
 /**
 * Computes Linear Algebra
 * @author Jeongbin Cho
@@ -21,12 +19,12 @@ public class LinearAlgebra {
 //                + " of width " + m.getWidth() + " with vector of length "
 //                + v.getLength());
 //        }
-        double[] s0 = new double[v.getLength()];
+        float[] s0 = new float[v.getLength()];
 
         for (int i = 0; i < m.getHeight(); i++) {
-            double sum = 0;
+            float sum = 0;
             for (int j = 0; j < m.getWidth(); j++) {
-                double s1 = m.get(i, j) * v.get(j);
+                float s1 = m.get(i, j) * v.get(j);
                 sum = sum + s1;
             }
             s0[i] = sum;
@@ -55,10 +53,10 @@ public class LinearAlgebra {
                 + m2.getHeight());
         }
 
-        double[][] s0 = new double[m1.getWidth()][m1.getHeight()];
+        float[][] s0 = new float[m1.getWidth()][m1.getHeight()];
         for (int i = 0; i < m1.getHeight(); i++) {
             for (int j = 0; j < m2.getHeight(); j++) {
-                double s1 = m1.get(i, j) + m2.get(i, j);
+                float s1 = m1.get(i, j) + m2.get(i, j);
                 s0[i][j] = s1;
             }
         }
@@ -73,7 +71,7 @@ public class LinearAlgebra {
     * @return dot product of v1 and v2
     **/
 
-    public static double dotProduct(Vector v1, Vector v2)
+    public static float dotProduct(Vector v1, Vector v2)
         throws IllegalOperandException {
 
         if (v1.getLength() != v2.getLength()) {
@@ -82,9 +80,9 @@ public class LinearAlgebra {
                 + "with a vector of length " + v2.getLength());
         }
 
-        double s0 = 0;
+        float s0 = 0;
         for (int i = 0; i < v1.getLength(); i++) {
-            double s1 = v1.get(i) * v2.get(i);
+            float s1 = v1.get(i) * v2.get(i);
             s0 = s0 + s1;
         }
 
@@ -106,9 +104,9 @@ public class LinearAlgebra {
                 + v1.getLength() + "with a vector of length " + v2.getLength());
         }
 
-        double[] s0 = new double[v1.getLength()];
+        float[] s0 = new float[v1.getLength()];
         for (int i = 0; i < v1.getLength(); i++) {
-            double s1 = v1.get(i) + v2.get(i);
+            float s1 = v1.get(i) + v2.get(i);
             s0[i] = s1;
         }
 
