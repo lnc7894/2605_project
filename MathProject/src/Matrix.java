@@ -64,6 +64,7 @@ public class Matrix {
         }
         return aString;
     }
+
     /**
      * Multiplies two matrices FOR POWER METHOD because it assumes that
      * the matrices are both n x n.
@@ -71,7 +72,7 @@ public class Matrix {
      * @param b
      * @return
      */
-    public Matrix multiply(Matrix a, Matrix b) {
+    private static Matrix multiply(Matrix a, Matrix b) {
         float[][] ma = new float[a.getHeight()][a.getWidth()];
         for(int i = 0; i < a.getHeight(); i++) {
             for (int j = 0; j < a.getWidth(); j++) {
