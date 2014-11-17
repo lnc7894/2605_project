@@ -1,6 +1,7 @@
 import org.apache.commons.math3.linear.*;
 
 import java.util.Random;
+import java.util.Scanner;
 public class mathproject {
 	/**
 	 * Power Method
@@ -83,9 +84,9 @@ public class mathproject {
         
         //prompt user for guesses
         System.out.println("Enter initial guesses for a, b, c");
-        double a = scan.nextdouble();
-        double b = scan.nextdouble();
-        double c = scan.nextdouble();
+        double a = scan.nextDouble();
+        double b = scan.nextDouble();
+        double c = scan.nextDouble();
         
         // get number of iterations
         System.out.println("Enter number of iterations");
