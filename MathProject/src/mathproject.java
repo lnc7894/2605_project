@@ -98,7 +98,7 @@ public class mathproject {
     }
     
     public void gn_log() {
-        
+        // base 10 log
     }
     
     public void gn_rat() {
@@ -116,7 +116,18 @@ public class mathproject {
     }
     
     public double[][] qr_fact_givens(double[][] matrix) {
-        
+        // initialized indexes
+        int i = 0;
+        int j = 0;
+        //getting matrix G
+        double alpha = (matrix[j][j] - matrix[i][i])/matrix[i][j];
+        double c = Math.sqrt(0.5 + (alpha/(2*(1 + Math.pow(alpha, 2)))));
+        double s = -Math.sqrt(0.5 - (alpha/(2*(1 + Math.pow(alpha, 2)))));
+        double[][] G = new double[matrix.length][matrix[0].length];
+        G[j][j] = c;
+        G[j][i] = -s;
+        G[i][j] = s;
+        G[i][i] = c;
         return null;
     }
     
