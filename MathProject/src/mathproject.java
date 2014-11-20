@@ -119,6 +119,8 @@ public class mathproject {
         // initialized indexes
         int i = 0;
         int j = 0;
+        //iterate through where i > j, put values in an array or something and then return the largest value index
+        
         //getting matrix G
         double alpha = (matrix[j][j] - matrix[i][i])/matrix[i][j];
         double c = Math.sqrt(0.5 + (alpha/(2*(1 + Math.pow(alpha, 2)))));
