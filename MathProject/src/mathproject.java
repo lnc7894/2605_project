@@ -19,10 +19,17 @@ public class mathproject {
     	double prevEvalue = 0;
     	int numIterations = 1;
     	for(int i = 0; i <= iterations - 1; i++) {
+    	    //System.out.println(a);
+    	    //System.out.println(b);
     	    b = b.multiply(a);
+    	    //System.out.println(b);
+    	    //System.out.println(v);
             v = b.operate(y);
+            //System.out.println(v);
+            //System.out.println("Iteration" + " " + numIterations);
             numIterations++;
         	double Evalue = v.dotProduct(y) / prevV.dotProduct(y);
+        	System.out.println("Eigenvalue" + " " + Evalue);
         	if (Evalue - prevEvalue <= epsilon & i > 1) {
         		// when the method has worked
         	    prevEvalue = Evalue;
@@ -35,10 +42,7 @@ public class mathproject {
         	    prevEvalue = Evalue;
         	    prevV = v;
         	}
-        	if (i == iterations - 1) {
-        		// for when the method has not worked and we have done the amount of iterations passed in
-        	    return null; //returns failure
-        	}
+            //System.out.println();
     	}
 		return null; // should never reach this
     	
@@ -166,12 +170,12 @@ public class mathproject {
     
     public static void main(String[] args) {
         int iter = 5;
-        double eps = .000000000000000000000000000000000000001;
-        double[][] matrix = {{6,7},{8,5}};
+        double eps = .1;
+        double[][] matrix = {{2,1},{4,5}};
         double[] vect = {1,0};
-        System.out.println("Iterations: " + power_method(matrix, vect, eps, iter).getIterations());
-        System.out.println("Eigenvalue: " + power_method(matrix, vect, eps, iter).getValue());
-        System.out.println("Eigenvector: " + power_method(matrix, vect, eps, iter).getVector());
+        //System.out.println("Iterations: " + power_method(matrix, vect, eps, iter).getIterations());
+        //System.out.println("Eigenvalue: " + power_method(matrix, vect, eps, iter).getValue());
+        //System.out.println("Eigenvector: " + power_method(matrix, vect, eps, iter).getVector());
     }
     
     
