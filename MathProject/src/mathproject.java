@@ -29,7 +29,7 @@ public class mathproject {
             //System.out.println("Iteration" + " " + numIterations);
             numIterations++;
         	double Evalue = v.dotProduct(y) / prevV.dotProduct(y);
-        	System.out.println("Eigenvalue" + " " + Evalue);
+        	//System.out.println("Eigenvalue" + " " + Evalue);
         	if (Evalue - prevEvalue <= epsilon & i > 1) {
         		// when the method has worked
         	    prevEvalue = Evalue;
@@ -48,7 +48,7 @@ public class mathproject {
     	
     }
 
-    public void thousandGen() {
+    public static void thousandGen() {
         for (int i = 0; i < 1000; i++) {
             Random rand = new Random();
             double ii = rand.nextDouble() * 4 - 2;
@@ -69,7 +69,7 @@ public class mathproject {
      * @param matrix
      * @return
      */
-    private double[][] inverse(double[][] matrix) {
+    private static double[][] inverse(double[][] matrix) {
         double det = matrix[0][0] - matrix[1][1];
         double upleft = matrix[0][0];
         double downright = matrix[1][1];
@@ -173,6 +173,7 @@ public class mathproject {
         double eps = .1;
         double[][] matrix = {{2,1},{4,5}};
         double[] vect = {1,0};
+        thousandGen();
         //System.out.println("Iterations: " + power_method(matrix, vect, eps, iter).getIterations());
         //System.out.println("Eigenvalue: " + power_method(matrix, vect, eps, iter).getValue());
         //System.out.println("Eigenvector: " + power_method(matrix, vect, eps, iter).getVector());
