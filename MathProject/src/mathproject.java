@@ -122,11 +122,20 @@ public class mathproject {
     public double[][] qr_fact_givens(double[][] matrix) {
         // initialized indexes
         double[][] A = matrix;
-        int i = 0;
-        int j = 0;
+        int m = matrix[0].length;
         int n = matrix.length;
         if (isSquare(A)) {
             n = n - 1;
+        }
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (i != j) {
+                    double c = A[j][j]/(Math.sqrt(Math.pow(A[j][j], 2) + Math.pow(A[i][j], 2)));
+                    double s = -A[i][j]/(Math.sqrt(Math.pow(A[j][j], 2) + Math.pow(A[i][j], 2)));
+                    //G is an mxn identity
+                    //using c and s
+                }
+            }
         }
         return null;
     }
