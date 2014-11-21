@@ -10,7 +10,7 @@ public class mathproject {
 	 * @param epsilon
 	 * @param iterations
 	 */
-    public PowerReturn power_method(double[][] matrix, double[] vector, double epsilon, int iterations) {
+    public static PowerReturn power_method(double[][] matrix, double[] vector, double epsilon, int iterations) {
     	RealMatrix a = new Array2DRowRealMatrix(matrix);
     	RealVector v = new ArrayRealVector(vector);
     	RealVector y = new ArrayRealVector(vector);
@@ -163,5 +163,16 @@ public class mathproject {
         }
         return (double) Math.sqrt(norm);
     }
+    
+    public static void main(String[] args) {
+        int iter = 5;
+        double eps = .000000000000000000000000000000000000001;
+        double[][] matrix = {{6,7},{8,5}};
+        double[] vect = {1,0};
+        System.out.println("Iterations: " + power_method(matrix, vect, eps, iter).getIterations());
+        System.out.println("Eigenvalue: " + power_method(matrix, vect, eps, iter).getValue());
+        System.out.println("Eigenvector: " + power_method(matrix, vect, eps, iter).getVector());
+    }
+    
     
 }
