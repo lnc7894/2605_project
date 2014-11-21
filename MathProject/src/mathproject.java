@@ -17,15 +17,16 @@ public class mathproject {
     	RealMatrix b = new Array2DRowRealMatrix(matrix);
     	RealVector prevV = new ArrayRealVector(vector);;
     	double prevEvalue = 0;
-    	int numIterations = 0;
+    	int numIterations = 1;
     	for(int i = 0; i <= iterations - 1; i++) {
     	    b = b.multiply(a);
             v = b.operate(y);
+            numIterations++;
         	double Evalue = v.dotProduct(y) / prevV.dotProduct(y);
         	if (Evalue - prevEvalue <= epsilon & i > 1) {
         		// when the method has worked
         	    prevEvalue = Evalue;
-        	    numIterations = i;
+        	    //numIterations = i;
         	    prevV = v;
         	    PowerReturn trieu = new PowerReturn(prevEvalue, numIterations, prevV); // method worked trieu = true
         	    return trieu; // returns the necessary values
