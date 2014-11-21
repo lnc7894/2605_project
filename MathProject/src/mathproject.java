@@ -13,9 +13,9 @@ public class mathproject {
     public PowerReturn power_method(double[][] matrix, double[] vector, double epsilon, int iterations) {
     	RealMatrix a = new Array2DRowRealMatrix(matrix);
     	RealVector v = new ArrayRealVector(vector);
-    	RealVector y = v;
-    	RealMatrix b = a;
-    	RealVector prevV = v;
+    	RealVector y = new ArrayRealVector(vector);
+    	RealMatrix b = new Array2DRowRealMatrix(matrix);
+    	RealVector prevV = new ArrayRealVector(vector);;
     	double prevEvalue = 0;
     	int numIterations = 0;
     	for(int i = 1; i <= iterations; i++) {
