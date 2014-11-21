@@ -18,7 +18,7 @@ public class mathproject {
     	RealVector prevV = new ArrayRealVector(vector);;
     	double prevEvalue = 0;
     	int numIterations = 0;
-    	for(int i = 1; i <= iterations; i++) {
+    	for(int i = 0; i <= iterations - 1; i++) {
     	    b = b.multiply(a);
             v = b.operate(y);
         	double Evalue = v.dotProduct(y) / prevV.dotProduct(y);
