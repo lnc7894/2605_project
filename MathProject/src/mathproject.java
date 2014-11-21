@@ -35,10 +35,9 @@ public class mathproject {
         	    prevEvalue = Evalue;
         	    prevV = v;
         	}
-        	if (i == iterations) {
+        	if (i == iterations - 1) {
         		// for when the method has not worked and we have done the amount of iterations passed in
-        	    PowerReturn failure = new PowerReturn(-1);
-        	    return failure; //returns failure
+        	    return null; //returns failure
         	}
     	}
 		return null; // should never reach this
