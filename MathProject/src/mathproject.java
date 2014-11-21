@@ -121,19 +121,13 @@ public class mathproject {
     
     public double[][] qr_fact_givens(double[][] matrix) {
         // initialized indexes
+        double[][] A = matrix;
         int i = 0;
         int j = 0;
-        //iterate through where i > j, put values in an array or something and then return the largest value index
-        
-        //getting matrix G
-        double alpha = (matrix[j][j] - matrix[i][i])/matrix[i][j];
-        double c = Math.sqrt(0.5 + (alpha/(2*(1 + Math.pow(alpha, 2)))));
-        double s = -Math.sqrt(0.5 - (alpha/(2*(1 + Math.pow(alpha, 2)))));
-        double[][] G = new double[matrix.length][matrix[0].length];
-        G[j][j] = c;
-        G[j][i] = -s;
-        G[i][j] = s;
-        G[i][i] = c;
+        int n = matrix.length;
+        if (isSquare(A)) {
+            n = n - 1;
+        }
         return null;
     }
     
@@ -157,6 +151,11 @@ public class mathproject {
             // do stuff
         }
         return det;
+    }
+    
+    //check to see if the matrix is mxm
+    public boolean isSquare(double[][] matrix) {
+        return (matrix.length == matrix[0].length);
     }
     
     // was making this for householder and was going to do first column, but should we do this for vectors as well?
