@@ -95,6 +95,13 @@ public class mathproject {
         // get number of iterations
         System.out.println("Enter number of iterations");
         int iter = scan.nextInt();
+        
+//        double[] beta = {a,b,c};
+//        RealVector Beta = new ArrayRealVector(beta);
+//        // x is in the list of points we get from the folks
+//        double[] P = {0}; // list of points we get from before. this is wehre we get x from
+//        float x = 0;
+//        double funct = a*(Math.pow(x, 2)) + b*x + c;
     }
     
     public void gn_exp() {
@@ -119,25 +126,52 @@ public class mathproject {
         return null;
     }
     
-    public double[][] qr_fact_givens(double[][] matrix) {
+    public static RealMatrix qr_fact_givens(double[][] matrix) {
         // initialized indexes
         double[][] A = matrix;
-        int m = matrix[0].length;
-        int n = matrix.length;
+        int m = matrix[0].length - 1;
+        int n = matrix.length - 1;
+        double[][] Gn = new double[matrix.length][matrix[0].length];
+        // make Gn the identity matrix
+        for (int i=0; i<n; i++){
+            for (int j=0; j<n; j++){
+                if (i==j){
+                    Gn[i][j] = 1;
+                }
+                else{
+                    Gn[i][j] = 0;
+                }
+            }
+        }
+        RealMatrix Q = new Array2DRowRealMatrix(Gn);
+        RealMatrix An = new Array2DRowRealMatrix(A);
         if (isSquare(A)) {
             n = n - 1;
         }
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
                 if (i != j) {
                     double c = A[j][j]/(Math.sqrt(Math.pow(A[j][j], 2) + Math.pow(A[i][j], 2)));
                     double s = -A[i][j]/(Math.sqrt(Math.pow(A[j][j], 2) + Math.pow(A[i][j], 2)));
                     //G is an mxn identity
+                    Gn[i][j] = c;
+                    Gn[i][j+1] = -s;
+                    Gn[i+1][j] = s;
+                    Gn[i+1][j+1] = c;
                     //using c and s
+                    //A = Gn*A; 
+                    RealMatrix G = new Array2DRowRealMatrix(Gn);
+                    System.out.println(G);
+                    An = G.multiply(An);
+                    System.out.println("An: " + An);
+                    Q = Q.multiply(G.transpose());
                 }
             }
         }
-        return null;
+        RealMatrix R = An; // need to subtract m - n rows
+        RealMatrix Qn = Q; //need to subtract m - n cols
+        // probably needs to be an object because i need to return both Q and R. 
+        return R;
     }
     
     //okay so i thought i needed this but probably not but if we need it later here we go
@@ -163,7 +197,7 @@ public class mathproject {
     }
     
     //check to see if the matrix is mxm
-    public boolean isSquare(double[][] matrix) {
+    public static boolean isSquare(double[][] matrix) {
         return (matrix.length == matrix[0].length);
     }
     
@@ -179,9 +213,10 @@ public class mathproject {
     public static void main(String[] args) {
         int iter = 5;
         double eps = .1;
-        double[][] matrix = {{2,1},{4,5}};
+        double[][] matrix = {{1,2,0},{1,1,0},{2,1,0}};
         double[] vect = {1,0};
-        thousandGen();
+        System.out.println("Q: " + qr_fact_givens(matrix));
+        //thousandGen();
         //System.out.println("Iterations: " + power_method(matrix, vect, eps, iter).getIterations());
         //System.out.println("Eigenvalue: " + power_method(matrix, vect, eps, iter).getValue());
         //System.out.println("Eigenvector: " + power_method(matrix, vect, eps, iter).getVector());
