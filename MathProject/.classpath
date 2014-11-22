@@ -5,5 +5,8 @@
 	<classpathentry kind="lib" path="Libs/Jama-1.0.3.jar"/>
 	<classpathentry kind="lib" path="Libs/commons-math3-3.3-javadoc.jar"/>
 	<classpathentry kind="lib" path="Libs/commons-math3-3.3.jar"/>
+	<classpathentry kind="lib" path="Libs/jcommon-1.0.23/jcommon-1.0.23.jar"/>
+	<classpathentry kind="lib" path="Libs/jcommon-1.0.23/jcommon-xml-1.0.23.jar"/>
+	<classpathentry kind="lib" path="Libs/jfreechart-1.0.19/jfreechart-1.0.19-demo.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
