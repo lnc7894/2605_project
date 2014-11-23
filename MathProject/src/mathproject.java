@@ -54,10 +54,10 @@ public class mathproject {
     }
 
     public static void thousandGen() {
-    	double[] detData = new double[1000]; // x
-        double[] traceData = new double[1000];// y
-        double[] detInverseData = new double[1000]; // x
-        double[] traceInverseData = new double[1000]; // y
+    	double[] det = new double[1000]; // x
+        double[] trace = new double[1000];// y
+        double[] detInverse = new double[1000]; // x
+        double[] traceInverse = new double[1000]; // y
         for (int i = 0; i < 1000; i++) {
             Random rand = new Random();
             double ii = rand.nextDouble() * 4 - 2;
@@ -65,14 +65,10 @@ public class mathproject {
             double ji = rand.nextDouble() * 4 - 2;
             double jj = rand.nextDouble() * 4 - 2;
             double[][] matrix = {{ii, ij}, {ji, jj}};
-            double trace = ii + jj;
-            double det = (ii * jj) - (ji * ij);
             double[] vector = {1, 0};
             PowerReturn aReturn = power_method(matrix, vector, .00005, 100);
             double absEValueMax = Math.abs(aReturn.getValue()); // this is part b bullet 2
             matrix = inverse(matrix);
-            double traceInverse = ii + jj;
-            double traceDet = (ii * jj) - (ji * ij);
             double absEValueMin = Math.abs(power_method(matrix, vector, .00005, 100).getValue()); // this is part b bullet 3
         }
     }
