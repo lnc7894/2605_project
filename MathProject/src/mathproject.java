@@ -1,12 +1,14 @@
 import org.apache.commons.math3.linear.*;
 import java.util.*;
-import org.jfree.chart.*;
-import statgraphics.*;
-import statgraphics.eda.*;
-import static statgraphics.util.Argument.*;
-import statgraphics.util.*;
 import java.util.Random;
 import java.util.Scanner;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.chart.BubbleChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.stage.Stage;
+
 public class mathproject {
 	/**
 	 * Power Method
@@ -53,7 +55,7 @@ public class mathproject {
     	
     }
 
-    public static void thousandGen() {
+    public static void thousandGen() extends Application{
     	PlotFrame[] pf = new PlotFrame[4];
     	String[] key = {"1", "2", "3", "4", "5"};
     	double[] detData = new double[999]; // x
@@ -86,24 +88,40 @@ public class mathproject {
             traceInverseData[i] = traceInverse;
             iterationsInverse[i] = bReturn.getIterations();
         }
-    	ScatterPlot scatter = new ScatterPlot("1st Scatter Plot", detData, traceData);
-        pf[0] = new PlotFrame("Scatter Plot I", scatter.getPlot(), 500, 500);
+    	
+        stage.setTitle("Power Method Graph 1");
+        final NumberAxis xAxis = new NumberAxis(-8, 4, 1);
+        final NumberAxis yAxis = new NumberAxis(-4, 4, 1);
+        final BubbleChart<Number,Number> blc = new BubbleChart<Number,Number>(xAxis,yAxis);
+        xAxis.setLabel("Determinant");
+        yAxis.setLabel("Trace");
+        blc.setTitle("Power Method Graph 1");
+       
+        XYChart.Series series1 = new XYChart.Series();
+        series1.setName("Product 1");
+        series1.getData().add(detData, traceData, iterations ));
+                       
+        Scene scene  = new Scene(blc);
+        blc.getData().addAll(series1, series2);           
+        stage.setScene(scene);
+        stage.show();
 
-        Hashtable argument = new Hashtable();
-        argument.put(DATA_NAMES, dataNames);
-        GraphicalAnalysis graphicalAnalysis = new ScatterPlot(argument, detData, traceData).graphicalAnalysis;
-        JFreeChart myPlot = (JFreeChart) graphicalAnalysis.output.get("PLOT");
-        pf[2] = new PlotFrame("Scatter Plot II", myPlot, 500, 500);
-        argument.put(DATA_NAMES, dataNames2);
-        argument.put(TITLE, "Residual Plot");
-        argument.put(XLABEL, "Determinent");
-        argument.put(YLABEL, "Trace");
-        graphicalAnalysis = new ScatterPlot(argument, detData, traceData).
-                            graphicalAnalysis;
-        pf[3] = new PlotFrame("Linear Regression: Residual Plot II",
-                           graphicalAnalysis.getPlot(), 500, 500);
- 
-        new PlotFrameFactory().putPlotFrame(pf);
+        stage.setTitle("Power Method Graph 2");
+        final NumberAxis xAxis = new NumberAxis(1, 53, 4);
+        final NumberAxis yAxis = new NumberAxis(0, 80, 10);
+        final BubbleChart<Number,Number> blc = new BubbleChart<Number,Number>(xAxis,yAxis);
+        xAxis.setLabel("Determinant");
+        yAxis.setLabel("Trace");
+        blc.setTitle("Power Method Graph 2");
+       
+        XYChart.Series series1 = new XYChart.Series();
+        series1.setName("Product 1");
+        series1.getData().add(detData, traceData, iterationsInverse );
+                       
+        Scene scene  = new Scene(blc);
+        blc.getData().addAll(series1, series2);           
+        stage.setScene(scene);
+        stage.show();
     }
 
     /**
