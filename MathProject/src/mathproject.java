@@ -49,7 +49,7 @@ public class mathproject {
     	
     }
 
-    public static void thousandGen() {
+    /*public static void thousandGen() {
         for (int i = 0; i < 1000; i++) {
             Random rand = new Random();
             double ii = rand.nextDouble() * 4 - 2;
@@ -63,14 +63,14 @@ public class mathproject {
             matrix = inverse(matrix);
             double absEValueMin = Math.abs(power_method(matrix, vector, .00005, 100).getValue()); // this is part b bullet 3
         }
-    }
+    }*/
 
     /**
      * Finds Inverse of a 2x2
      * @param matrix
      * @return
      */
-    private static double[][] inverse(double[][] matrix) {
+    public static double[][] inverse(double[][] matrix) {
         double det = matrix[0][0] - matrix[1][1];
         double upleft = matrix[0][0];
         double downright = matrix[1][1];
