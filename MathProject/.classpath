@@ -5,9 +5,5 @@
 	<classpathentry kind="lib" path="Libs/Jama-1.0.3.jar"/>
 	<classpathentry kind="lib" path="Libs/commons-math3-3.3-javadoc.jar"/>
 	<classpathentry kind="lib" path="Libs/commons-math3-3.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/TTT/Downloads/jcommon-1.0.23/jcommon-1.0.23.jar"/>
-	<classpathentry kind="lib" path="C:/Users/TTT/Downloads/jcommon-1.0.23/jcommon-xml-1.0.23.jar"/>
-	<classpathentry kind="lib" path="C:/Users/TTT/Downloads/jfreechart-1.0.19/jfreechart-1.0.19-demo.jar"/>
-	<classpathentry kind="lib" path="C:/Users/TTT/Downloads/javastat_statgraphics_beta1.4.00/javastat_statgraphics_1.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,10 +1,5 @@
 import org.apache.commons.math3.linear.*;
-import java.util.*;
-import org.jfree.chart.*;
-import statgraphics.*;
-import statgraphics.eda.*;
-import static statgraphics.util.Argument.*;
-import statgraphics.util.*;
+
 import java.util.Random;
 import java.util.Scanner;
 public class mathproject {
