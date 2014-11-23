@@ -1,5 +1,6 @@
 import org.apache.commons.math3.linear.*;
 
+import java.io.FileNotFoundException;
 import java.util.Random;
 import java.util.Scanner;
 public class mathproject {
@@ -85,7 +86,12 @@ public class mathproject {
     public void gn_qua() { //not void, just void for now
         Scanner scan = new Scanner(System.in);
         //forgot how to do text files
-        
+//        try {
+//            
+//        }
+//        catch (FileNotFoundException e) {
+//            System.out.println(e);
+//        }
         //prompt user for guesses
         System.out.println("Enter initial guesses for a, b, c");
         double a = scan.nextDouble();
@@ -153,7 +159,7 @@ public class mathproject {
         Double[][] HHunit = new Double[unitLength][unitLength];
         for(int a = 0; a < unitLength; a++) {
            for(int b = 0; a < unitLength; b++) {
-               //HHunit[a][b] = unit.getEntry(0) * unitTrans
+               //HHunit[a][b] = unit.getEntry(0) * getRow(unitTrans);
            }
         }
         return unitTrans;
@@ -312,10 +318,21 @@ public class mathproject {
                 }
             }
             // cut off rows
-            RealMatrix R = An; // need to subtract m - n rows
-            System.out.println("R " + R);
-            RealMatrix Qn = Q; //need to subtract m - n cols
-            System.out.println("Q " + Q);
+            RealMatrix Ri = An; // need to subtract m - n rows
+            System.out.println("R " + Ri);
+            RealMatrix Qa = Q.transpose(); //need to subtract m - n cols
+            System.out.println("Q " + Qa);
+            double[][] rparam = new double[n][n];
+            for (int rows = 0; rows < n; rows++) {
+                for (int cols = 0; cols < n; cols++) {
+                    rparam[rows][cols] = Ri.getEntry(rows, cols);
+                }
+            }
+            RealMatrix R = new Array2DRowRealMatrix(rparam);
+            System.out.println("R new: " + R);
+            double[][] qparam = new double[n][m];
+            System.out.println("n + m " + n + " " + m);
+            //i need q but i dont have it
         }
         
         // probably needs to be an object because i need to return both Q and R. 
@@ -361,7 +378,8 @@ public class mathproject {
     public static void main(String[] args) {
         int iter = 5;
         double eps = .1;
-        double[][] matrix = {{1,0},{0,1},{6,0}};
+        double[][] matrix = {{1,0,1},{0,1,1},{6,0,2},{4,3,2}};
+        //double[][] matrix = {{1,0},{0,1},{6,0}};
         double[] vect = {1,0};
         System.out.println("M stuff idk : " + qr_fact_givens(matrix));
         //thousandGen();
