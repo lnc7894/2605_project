@@ -12,7 +12,7 @@ import org.apache.commons.math3.linear.ArrayRealVector;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.RealVector;
 
-public class Plots extends Application{
+public class Plots2 extends Application{
 	
 	@Override public void start(Stage stage) {
         stage.setTitle("Scatter Plot of Det vs Trace");
@@ -77,7 +77,7 @@ public class Plots extends Application{
         series.setName("More Iteratiosn #More Size");
                        
         Scene scene  = new Scene(blc);
-        blc.getData().addAll(series);           
+        blc.getData().addAll(series1);           
         stage.setScene(scene);
         stage.show();
     }
