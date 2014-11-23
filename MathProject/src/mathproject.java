@@ -119,9 +119,10 @@ public class mathproject {
     public double[][] qr_fact_househ(double[][] matrix) {
         //need magnitude
         double[] subMatrix = {matrix[1][1],matrix[2][1],matrix[3][1]};
+        RealVector sub = new ArrayRealVector(subMatrix);
         double magSubMatrix = magnitude(subMatrix);
-        if (subMatrix[1] < 0) {
-            double[] subMatrixB = {subMatrix[1] + magSubMatrix, subMatrix[2], subMatrix[3]};
+        if (subMatrix[0] < 0) {
+            double[] subMatrixB = {subMatrix[0] + magSubMatrix, subMatrix[1], subMatrix[2]};
         }
         return null;
     }
