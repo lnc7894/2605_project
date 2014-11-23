@@ -58,10 +58,8 @@ public class mathproject {
     	String[] key = {"1", "2", "3", "4", "5"};
     	double[] detData = new double[999]; // x
         double[] traceData = new double[999];// y
-        double[] iterations = new double[999];
         double[] detInverseData = new double[999]; // x
         double[] traceInverseData = new double[99]; // y
-        double[] iterationsInverse = new double[999];
         for (int i = 0; i < 1000; i++) {
             Random rand = new Random();
             double ii = rand.nextDouble() * 4 - 2;
@@ -71,20 +69,17 @@ public class mathproject {
             double[][] matrix = {{ii, ij}, {ji, jj}};
             double trace = ii + jj;
             double det = (ii * jj) - (ji * ij);
-            double[] vector = {1, 0};
-            PowerReturn aReturn = power_method(matrix, vector, .00005, 100);
             detData[i] = det;
             traceData[i] = trace;
-            iterations[i] = aReturn.getIterations();
+            double[] vector = {1, 0};
+            PowerReturn aReturn = power_method(matrix, vector, .00005, 100);
             double absEValueMax = Math.abs(aReturn.getValue()); // this is part b bullet 2
             matrix = inverse(matrix);
             double traceInverse = ii + jj;
             double DetInverse = (ii * jj) - (ji * ij);
-            PowerReturn bReturn = power_method(matrix, vector, .00005, 100);
-            double absEValueMin = Math.abs(bReturn.getValue()); // this is part b bullet 3
             detInverseData[i] = DetInverse;
             traceInverseData[i] = traceInverse;
-            iterationsInverse[i] = bReturn.getIterations();
+            double absEValueMin = Math.abs(power_method(matrix, vector, .00005, 100).getValue()); // this is part b bullet 3
         }
     	ScatterPlot scatter = new ScatterPlot("1st Scatter Plot", detData, traceData);
         pf[0] = new PlotFrame("Scatter Plot I", scatter.getPlot(), 500, 500);
