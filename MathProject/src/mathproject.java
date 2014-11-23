@@ -126,45 +126,64 @@ public class mathproject {
         return null;
     }
     
+    // changed from double[][] to RealMatrix
     public static RealMatrix qr_fact_givens(double[][] matrix) {
         // initialized indexes
         double[][] A = matrix;
         int m = matrix[0].length - 1;
         int n = matrix.length - 1;
         double[][] Gn = new double[matrix.length][matrix[0].length];
+        double[][] Qi = new double[matrix.length][matrix[0].length];
         // make Gn the identity matrix
-        for (int i=0; i<n; i++){
-            for (int j=0; j<n; j++){
+        for (int i=0; i<m + 1; i++){
+            for (int j=0; j<n + 1; j++){
                 if (i==j){
                     Gn[i][j] = 1;
+                    Qi[i][j] = 1;
                 }
                 else{
                     Gn[i][j] = 0;
+                    Qi[i][j] = 0;
                 }
             }
         }
-        RealMatrix Q = new Array2DRowRealMatrix(Gn);
+        RealMatrix Q = new Array2DRowRealMatrix(Qi);
         RealMatrix An = new Array2DRowRealMatrix(A);
         if (isSquare(A)) {
             n = n - 1;
         }
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
+        for (int j = 0; j < n; j++) {
+            for (int i = 0; i < m + 1; i++) {
                 if (i != j) {
+                    System.out.println("i: " + i);
+                    System.out.println("j: " + j);
                     double c = A[j][j]/(Math.sqrt(Math.pow(A[j][j], 2) + Math.pow(A[i][j], 2)));
                     double s = -A[i][j]/(Math.sqrt(Math.pow(A[j][j], 2) + Math.pow(A[i][j], 2)));
+                    System.out.println("Ajj: " + A[j][j]);
+                    System.out.println("c: " + c);
+                    System.out.println("s: " + s);
                     //G is an mxn identity
-                    Gn[i][j] = c;
-                    Gn[i][j+1] = -s;
-                    Gn[i+1][j] = s;
-                    Gn[i+1][j+1] = c;
+                    //System.out.println("G before c + s: " + G);
+                    Gn[i-1][j] = c;
+                    Gn[i-1][j+1] = -s;
+                    Gn[i][j] = s;
+                    Gn[i][j+1] = c;
+                    
+                    RealMatrix G = new Array2DRowRealMatrix(Gn);
                     //using c and s
                     //A = Gn*A; 
-                    RealMatrix G = new Array2DRowRealMatrix(Gn);
-                    System.out.println(G);
+                    System.out.println("G: " + G);
                     An = G.multiply(An);
                     System.out.println("An: " + An);
                     Q = Q.multiply(G.transpose());
+                    System.out.println("Row Dim: " + An.getRowDimension());
+                    System.out.println("Col Dim: " + An.getColumnDimension());
+                    A = An.getData();
+                    /*for (int a1 = 0; a1 < A[0].length; a1++) {
+                        for (int b1 = 0; b1 < A.length; b1++) {
+                            System.out.println(A[a1][b1]);
+                        }
+                    }*/ 
                 }
             }
         }
@@ -213,7 +232,7 @@ public class mathproject {
     public static void main(String[] args) {
         int iter = 5;
         double eps = .1;
-        double[][] matrix = {{1,2,0},{1,1,0},{2,1,0}};
+        double[][] matrix = {{1,2,0},{1,1,1},{2,1,0}};
         double[] vect = {1,0};
         System.out.println("Q: " + qr_fact_givens(matrix));
         //thousandGen();
