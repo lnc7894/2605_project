@@ -54,10 +54,6 @@ public class mathproject {
     }
 
     public static void thousandGen() {
-    	double[] det = new double[1000]; // x
-        double[] trace = new double[1000];// y
-        double[] detInverse = new double[1000]; // x
-        double[] traceInverse = new double[1000]; // y
         for (int i = 0; i < 1000; i++) {
             Random rand = new Random();
             double ii = rand.nextDouble() * 4 - 2;
