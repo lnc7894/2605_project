@@ -8,8 +8,5 @@
 	<classpathentry kind="lib" path="Libs/jcommon-1.0.23/jcommon-1.0.23.jar"/>
 	<classpathentry kind="lib" path="Libs/jcommon-1.0.23/jcommon-xml-1.0.23.jar"/>
 	<classpathentry kind="lib" path="Libs/jfreechart-1.0.19/jfreechart-1.0.19-demo.jar"/>
-	<classpathentry kind="lib" path="Libs/jcommon-1.0.23.jar"/>
-	<classpathentry kind="lib" path="Libs/jcommon-xml-1.0.23.jar"/>
-	<classpathentry kind="lib" path="Libs/jfreechart-1.0.19-demo.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
