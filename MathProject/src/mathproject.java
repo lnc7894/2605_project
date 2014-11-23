@@ -83,6 +83,22 @@ public class mathproject {
         }
     	ScatterPlot scatter = new ScatterPlot("1st Scatter Plot", detData, traceData);
         pf[0] = new PlotFrame("Scatter Plot I", scatter.getPlot(), 500, 500);
+
+        Hashtable argument = new Hashtable();
+        argument.put(DATA_NAMES, dataNames);
+        GraphicalAnalysis graphicalAnalysis = new ScatterPlot(argument, detData, traceData).graphicalAnalysis;
+        JFreeChart myPlot = (JFreeChart) graphicalAnalysis.output.get("PLOT");
+        pf[2] = new PlotFrame("Scatter Plot II", myPlot, 500, 500);
+        argument.put(DATA_NAMES, dataNames2);
+        argument.put(TITLE, "Residual Plot");
+        argument.put(XLABEL, "Determinent");
+        argument.put(YLABEL, "Trace");
+        graphicalAnalysis = new ScatterPlot(argument, detData, traceData).
+                            graphicalAnalysis;
+        pf[3] = new PlotFrame("Linear Regression: Residual Plot II",
+                           graphicalAnalysis.getPlot(), 500, 500);
+ 
+        new PlotFrameFactory().putPlotFrame(pf);
     }
 
     /**
