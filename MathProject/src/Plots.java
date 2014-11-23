@@ -34,6 +34,8 @@ public class Plots extends Application{
         double[] traceInverseData = new double[99]; // y
         double[] iterationsInverse = new double[999];
 
+        XYChart.Series series1 = new XYChart.Series();
+
         //For getting data
         for (int i = 0; i < 1000; i++) {
             Random rand = new Random();
@@ -53,14 +55,13 @@ public class Plots extends Application{
 
             // Inverse Matrix
             matrix = mathproject.inverse(matrix);
-            PowerReturn bReturn = power_method(matrix, vector, .00005, 100);
+            PowerReturn bReturn = mathproject.power_method(matrix, vector, .00005, 100);
             double absEValueMin = Math.abs(bReturn.getValue()); // this is part b bullet 3
-            detInverseData = (matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0]);
+            detInverseData[i] = (matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0]);
             traceInverseData[i] = matrix[0][0] + matrix[1][1];
-            iterationsInverst[i] = bReturn.getIterations();
+            iterationsInverse[i] = bReturn.getIterations();
         }
 
-        XYChart.Series series1 = new XYChart.Series();
         series1.setName("Product 1");
         series1.getData().add(new XYChart.Data(3, 35));
         series1.getData().add(new XYChart.Data(12, 60));
@@ -77,7 +78,6 @@ public class Plots extends Application{
         stage.show();
     }
 
-    }
 	public static void main(String[] args) {
         launch(args);
     }
