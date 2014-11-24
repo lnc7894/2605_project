@@ -29,7 +29,6 @@ public class mathproject {
             v = b.operate(y);
             //System.out.println(v);
             //System.out.println("Iteration" + " " + numIterations);
-            numIterations++;
         	double Evalue = v.dotProduct(y) / prevV.dotProduct(y);
         	//System.out.println("Eigenvalue" + " " + Evalue);
         	if (Evalue - prevEvalue <= epsilon && i > 1) {
@@ -44,26 +43,58 @@ public class mathproject {
         	    prevEvalue = Evalue;
         	    prevV = v;
         	}
+            numIterations++;
             //System.out.println();
     	}
 		return null; // should never reach this
     	
     }
 
-    public static void thousandGen() {
-        for (int i = 0; i < 1000; i++) {
-            Random rand = new Random();
-            double ii = rand.nextDouble() * 4 - 2;
-            double ij = rand.nextDouble() * 4 - 2;
-            double ji = rand.nextDouble() * 4 - 2;
-            double jj = rand.nextDouble() * 4 - 2;
-            double[][] matrix = {{ii, ij}, {ji, jj}};
-            double[] vector = {1, 0};
-            PowerReturn aReturn = power_method(matrix, vector, .00005, 100);
-            double absEValueMax = Math.abs(aReturn.getValue()); // this is part b bullet 2
-            matrix = inverse(matrix);
-            double absEValueMin = Math.abs(power_method(matrix, vector, .00005, 100).getValue()); // this is part b bullet 3
-        }
+    /**
+     * Finds det of a 3x3 matrix yo
+     * @param m
+     * @return double that is the det
+     */
+    public static double dewy(RealMatrix m) {
+    	double diana1 = m.getEntry(0, 0) * m.getEntry(1, 1) * m.getEntry(2, 2);
+    	double diana2 = m.getEntry(0, 1) * m.getEntry(1, 2) * m.getEntry(2, 0);
+    	double diana3 = m.getEntry(0, 1) * m.getEntry(1, 0) * m.getEntry(2, 1);
+    	double diana4 = m.getEntry(2, 0) * m.getEntry(1, 1) * m.getEntry(0, 2);
+    	double diana5 = m.getEntry(2, 1) * m.getEntry(1, 2) * m.getEntry(0, 0);
+    	double diana6 = m.getEntry(2, 2) * m.getEntry(1, 0) * m.getEntry(0, 1);
+    	double dianaFinal = (diana1 + diana2 + diana3) - (diana4 + diana5 + diana6);
+    	return dianaFinal;
+    }
+
+    public static RealMatrix isabella(RealMatrix mary) {
+    	//Stuff to put into Transpose
+    	double A = mary.getEntry(1, 1) * mary.getEntry(2, 2) - mary.getEntry(1, 2) * mary.getEntry(2, 1);
+    	double B = -(mary.getEntry(1, 0) * mary.getEntry(2, 2) - mary.getEntry(1, 2) * mary.getEntry(2, 0));
+    	double C = mary.getEntry(1, 0) * mary.getEntry(2, 1) - mary.getEntry(1, 1) * mary.getEntry(2, 0);
+    	double D = -(mary.getEntry(0, 1) * mary.getEntry(2, 2) - mary.getEntry(0, 2) * mary.getEntry(2, 1));
+    	double E = mary.getEntry(0, 0) * mary.getEntry(2, 2) - mary.getEntry(0, 2) * mary.getEntry(2, 0);
+    	double F = -(mary.getEntry(0, 0) * mary.getEntry(2, 1) - mary.getEntry(0, 1) * mary.getEntry(2, 0));
+    	double G = mary.getEntry(0, 1) * mary.getEntry(1, 2) - mary.getEntry(0, 2) * mary.getEntry(1, 1);
+    	double H = -(mary.getEntry(0, 0) * mary.getEntry(1, 2) - mary.getEntry(0, 2) * mary.getEntry(1, 0));
+    	double I = mary.getEntry(0, 0) * mary.getEntry(1, 1) - mary.getEntry(0, 1) * mary.getEntry(1, 0);
+        
+    	//det
+    	double daisy = dewy(mary);
+        
+        mary.setEntry(0, 0, A);
+        mary.setEntry(0, 1, B);
+        mary.setEntry(0, 2, C);
+        mary.setEntry(1, 0, D);
+        mary.setEntry(1, 1, E);
+        mary.setEntry(1, 2, F);
+        mary.setEntry(2, 0, G);
+        mary.setEntry(2, 1, H);
+        mary.setEntry(2, 2, I);
+        mary = mary.transpose();
+        
+        //inverse
+        mary = mary.scalarMultiply(1.0 / daisy);
+        return mary;
     }
 
     /**
@@ -71,7 +102,7 @@ public class mathproject {
      * @param matrix
      * @return
      */
-    private static double[][] inverse(double[][] matrix) {
+    static double[][] inverse(double[][] matrix) {
         double det = matrix[0][0] - matrix[1][1];
         double upleft = matrix[0][0];
         double downright = matrix[1][1];
@@ -96,249 +127,6 @@ public class mathproject {
         return new Array2DRowRealMatrix(identity);
     }
 
-    public void gn_qua() { //not void, just void for now
-        Scanner scan = new Scanner(System.in);
-        //forgot how to do text files
-//        try {
-//            
-//        }
-//        catch (FileNotFoundException e) {
-//            System.out.println(e);
-//        }
-        //prompt user for guesses
-        System.out.println("Enter initial guesses for a, b, c");
-        double a = scan.nextDouble();
-        double b = scan.nextDouble();
-        double c = scan.nextDouble();
-        
-        // get number of iterations
-        System.out.println("Enter number of iterations");
-        int iter = scan.nextInt();
-        
-//        double[] beta = {a,b,c};
-//        RealVector Beta = new ArrayRealVector(beta);
-//        // x is in the list of points we get from the folks
-//        double[] P = {0}; // list of points we get from before. this is wehre we get x from
-//        float x = 0;
-//        double funct = a*(Math.pow(x, 2)) + b*x + c;
-    }
-    
-    public void gn_exp() {
-        
-    }
-    
-    public void gn_log() {
-        // base 10 log
-    }
-    
-    public void gn_rat() {
-        
-    }
-    
-    //changed to output RealMatrix
-    public static RealMatrix qr_fact_househ(double[][] matrix) {
-        //need magnitude
-        int m = matrix[0].length;
-        int n = matrix.length;
-        double[][] I = new double[matrix.length][matrix[0].length];
-        for (int i=0; i<m; i++){
-            for (int j=0; j<n; j++){
-                if (i==j){
-                    I[i][j] = 1;
-                }
-            }
-        }
-//        for (int top = 0; top < n; top++) {
-//            // zero out the stuff above top
-//            double[] subMatrix = {matrix[0][0],matrix[1][0],matrix[2][0]};
-//            System.out.println(Arrays.toString(subMatrix));
-//            double magSubMatrix = magnitude(subMatrix);
-//            double[] subMatrixB = subMatrix;
-//            if (subMatrix[0] < 0) {
-//                subMatrixB[0] = subMatrix[0] + magSubMatrix;
-//            } else if (subMatrix[0] > 0) {
-//                subMatrixB[0] = subMatrix[0] - magSubMatrix;
-//            }
-//            RealVector sub = new ArrayRealVector(subMatrixB);
-//            RealVector unit = sub.mapDivide(magSubMatrix);
-//            int unitLength = unit.getDimension();
-//            double[][] M = new double[unitLength][unitLength];
-//            for(int j = 0; j < unitLength; j++) {
-//                for(int i = 0; i < unitLength; i++) {
-//                    M[i][j] = unit.getEntry(j);
-//                }
-//            }
-//            RealMatrix unitTrans = new Array2DRowRealMatrix(M);
-//            Double[][] HHunit = new Double[unitLength][unitLength];
-//            for(int a = 0; a < unitLength; a++) {
-//               for(int b = 0; a < unitLength; b++) {
-//                   //HHunit[a][b] = unit.getEntry(0) * getRow(unitTrans);
-//               }
-//            }
-//        }
-        return null;
-    }
-    
-//    // changed from double[][] to RealMatrix
-//    public static RealMatrix qr_fact_givens(double[][] matrix) {
-//        // initialized indexes
-//        RealMatrix A = new Array2DRowRealMatrix(matrix);
-//        int m = matrix[0].length - 1;
-//        int n = matrix.length - 1;
-//        RealMatrix Gn = new Array2DRowRealMatrix(new double[matrix.length][matrix.length]);
-//        RealMatrix Qi = new Array2DRowRealMatrix(new double[matrix.length][matrix.length]);
-//        // make Gn the identity matrix
-//        if (isSquare(A)) {
-//            for (int i=0; i<m + 1; i++){ // + 1
-//                for (int j=0; j<n + 1; j++){ // + 1
-//                    if (i==j){
-//                        Gn.setEntry(i, j, 1);
-//                        Qi.setEntry(i, j, 1);
-//                    }
-//                }
-//            }
-//            RealMatrix Q = Qi;
-//            RealMatrix An = A;
-//            if (isSquare(A)) {
-//                n = n - 1;
-//            }
-//            for (int j = 0; j < n + 1; j++) {
-//                for (int i = 0; i < m + 1; i++) {
-//                    if (i != j && i > j) {
-//                        // this loop will make Gn the identity again. k and l are i and j but i ran out of variables
-//                        for (int k=0; k<m + 1; k++){ // + 1
-//                            for (int l=0; l<n + 2; l++){ // + 2
-//                                if (k==l){
-//                                    Gn.setEntry(k, l, 1);
-//                                }
-//                            }
-//                        }
-//                        double c = A.getEntry(j, j)/(Math.sqrt(Math.pow(A.getEntry(j, j), 2) + Math.pow(A.getEntry(i, j), 2)));
-//                        double s = -A.getEntry(i, j)/(Math.sqrt(Math.pow(A.getEntry(j, j), 2) + Math.pow(A.getEntry(i, j), 2)));
-////                        System.out.println("Ajj: " + A[j][j]);
-////                        System.out.println("c: " + c);
-////                        System.out.println("s: " + s);
-//                        int x = i;
-//                        int y = j;
-//                        //G is an mxn identity
-//                        //System.out.println("G before c + s: " + G);
-//                        Gn.setEntry(y, y, c);
-//                        Gn.setEntry(y, x, -s);
-//                        Gn.setEntry(x, y, s);
-//                        Gn.setEntry(x, x, c);
-//                        
-//                        RealMatrix G = Gn;
-//                        //using c and s
-//                        //A = Gn*A; 
-//                        System.out.println("G: " + G);
-//                        An = (Matrix) G.multiply(An);
-//                        System.out.println("An: " + An);
-//                        Q = (Matrix) Q.multiply(G.transpose());
-//                        System.out.println("Row Dim: " + An.getRowDimension());
-//                        System.out.println("Col Dim: " + An.getColumnDimension());
-//                        //A = An.getData();
-//                        /*for (int a1 = 0; a1 < A[0].length; a1++) {
-//                            for (int b1 = 0; b1 < A.length; b1++) {
-//                                System.out.println(A[a1][b1]);
-//                            }
-//                        }*/ 
-//                    }
-//                }
-//            }
-//            RealMatrix R = An; // need to subtract m - n rows
-//            System.out.println("R " + R);
-//            RealMatrix Qn = Q; //need to subtract m - n cols
-//            System.out.println("Q " + Qn);
-//        }
-//        // non square
-//        else {
-//            for (int i=0; i<m + 2; i++){ // + 1
-//                for (int j=0; j<n + 1; j++){ // + 1
-//                    if (i==j){
-//                        Gn.setEntry(i, j, 1);
-//                        Qi.setEntry(i, j, 1);
-//                    }
-//                }
-//            }
-//            RealMatrix Q = Qi;
-//            RealMatrix An = A;
-//            if (isSquare(A)) {
-//                n = n - 1;
-//            }
-//            for (int j = 0; j < n + 1; j++) {
-//                for (int i = 0; i < m + 2; i++) {
-//                    if (i != j && i > j) {
-//                        // this loop will make Gn the identity again. k and l are i and j but i ran out of variables
-//                        for (int k=0; k<m + 1; k++){ // + 1
-//                            for (int l=0; l<n + 1; l++){ // + 2
-//                                if (k==l){
-//                                    Gn.setEntry(k, l, 1);
-//                                }
-//                            }
-//                        }
-//                        System.out.println("i: " + i);
-//                        System.out.println("j: " + j);
-//                        System.out.println("An: " + An);
-//                        double c = A.getEntry(j, j)/(Math.sqrt(Math.pow(A.getEntry(j, j), 2) + Math.pow(A.getEntry(i, j), 2)));
-//                        double s = -A.getEntry(i, j)/(Math.sqrt(Math.pow(A.getEntry(j, j), 2) + Math.pow(A.getEntry(i, j), 2)));
-//                        //System.out.println("Aij: " + A[i][j]);
-//                        System.out.println("c: " + c);
-//                        System.out.println("s: " + s);
-//                        int x = i;
-//                        int y = j;
-//                        //G is an mxn identity
-//                        //System.out.println("G before c + s: " + G);
-//                        Gn.setEntry(y, y, c);
-//                        Gn.setEntry(y, x, -s);
-//                        Gn.setEntry(x, y, s);
-//                        Gn.setEntry(x, x, c);
-//                        
-//                        RealMatrix G = Gn;
-//                        //using c and s
-//                        //A = Gn*A; 
-//                        System.out.println("G: " + G);
-//                        An = G.multiply(An);
-//                        System.out.println("An: " + An);
-//                        Q = Q.multiply(G.transpose());
-//                        //A = An.getData();
-//                        /*for (int a1 = 0; a1 < A[0].length; a1++) {
-//                            for (int b1 = 0; b1 < A.length; b1++) {
-//                                System.out.println(A[a1][b1]);
-//                            }
-//                        }*/ 
-//                    }
-//                }
-//            }
-//            // cut off rows
-//            RealMatrix Ri = An; // need to subtract m - n rows
-//            System.out.println("R " + Ri);
-//            RealMatrix Qa = Q; //need to subtract m - n cols - dont need to transpose
-//            System.out.println("Q " + Qa);
-//            double[][] rparam = new double[n][n];
-//            for (int rows = 0; rows < n; rows++) {
-//                for (int cols = 0; cols < n; cols++) {
-//                    rparam[rows][cols] = Ri.getEntry(rows, cols);
-//                }
-//            }
-//            RealMatrix R = new Array2DRowRealMatrix(rparam);
-//            System.out.println("R new: " + R);
-//            double[][] qparam = new double[m+1][n+1];
-//            for (int rows = 0; rows < n; rows++) {
-//                for (int cols = 0; cols < m ; cols++) {
-//                    qparam[rows][cols] = Qa.getEntry(rows, cols);
-//                }
-//            }
-//            RealMatrix Qnew = new Array2DRowRealMatrix(qparam);
-//            System.out.println("Q new: " + Qnew);
-//
-//            System.out.println("n + m " + n + " " + m);
-//            //i need q but i dont have it
-//        }
-//        
-//        // probably needs to be an object because i need to return both Q and R. 
-//        return null;
-//    }
-    
     //okay so i thought i needed this but probably not but if we need it later here we go
     public double determinant(double[][] matrix) {
         double det = 0;
@@ -377,17 +165,9 @@ public class mathproject {
     }
     
     public static void main(String[] args) {
-        int iter = 5;
-        double eps = .1;
-        //double[][] matrix = {{1,2,0},{1,1,1},{2,1,0}};
-        double[][] matrix = {{1,0},{0,1},{6,0}};
-        //double[][] matrix = {{2,3,4},{1,5,7},{2,8,5},{3,5,8}};
-        double[] vect = {1,0};
-        //System.out.println("M stuff idk : " + qr_fact_givens(matrix));
-        //thousandGen();
-        //System.out.println("Iterations: " + power_method(matrix, vect, eps, iter).getIterations());
-        //System.out.println("Eigenvalue: " + power_method(matrix, vect, eps, iter).getValue());
-        //System.out.println("Eigenvector: " + power_method(matrix, vect, eps, iter).getVector());
+        double[][] m = {{1,2,3}, {0,5,6}, {0,0,9}};
+        RealMatrix matthew = new Array2DRowRealMatrix(m);
+        System.out.println("Inverse: " + isabella(matthew));
     }
     
     
