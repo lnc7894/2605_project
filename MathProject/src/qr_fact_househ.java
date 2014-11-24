@@ -65,8 +65,11 @@ public class qr_fact_househ {
 //            }
             HHunit = HHunit.scalarMultiply(2);
             Hn = I.subtract(HHunit);
+            System.out.println("Hn after iteration: " +Hn);
             An = Hn.multiply(An);
+            System.out.println("An: " + An);
             H = H.multiply(Hn);
+            System.out.println("H: " + H);
         }
         Qi = H;
         Ri = An;
