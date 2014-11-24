@@ -381,7 +381,7 @@ public class mathproject {
         double[][] matrix = {{1,0,1},{0,1,1},{6,0,2},{4,3,2}};
         //double[][] matrix = {{1,0},{0,1},{6,0}};
         double[] vect = {1,0};
-        //System.out.println("M stuff idk : " + qr_fact_givens(matrix));
+        System.out.println("M stuff idk : " + qr_fact_givens(matrix));
         //thousandGen();
         //System.out.println("Iterations: " + power_method(matrix, vect, eps, iter).getIterations());
         //System.out.println("Eigenvalue: " + power_method(matrix, vect, eps, iter).getValue());
