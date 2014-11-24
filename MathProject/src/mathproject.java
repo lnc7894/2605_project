@@ -32,7 +32,7 @@ public class mathproject {
             numIterations++;
         	double Evalue = v.dotProduct(y) / prevV.dotProduct(y);
         	//System.out.println("Eigenvalue" + " " + Evalue);
-        	if (Evalue - prevEvalue <= epsilon & i > 1) {
+        	if (Evalue - prevEvalue <= epsilon && i > 1) {
         		// when the method has worked
         	    prevEvalue = Evalue;
         	    //numIterations = i;

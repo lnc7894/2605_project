@@ -80,21 +80,21 @@ public class Gn_Stuff {
         System.out.println("Guess the number of iterations");
         double numberOfIterations = scan.nextDouble();
         
-        double[] resident = new double[x.length];
+        double[] residual = new double[x.length];
         for (int n = 0; n < x.length; n++) {
-            resident[n] = y[n] - equationQua(a0, b0, c0, x[n]);
+            residual[n] = y[n] - equationQua(a0, b0, c0, x[n]);
         }
-
-        double[][] j = new double[resident.length][3];
-        RealMatrix jack = new Array2DRowRealMatrix(j);
+        RealVector Res = new ArrayRealVector(residual);
+        double[][] j = new double[residual.length][3];
+        RealMatrix Jacobi = new Array2DRowRealMatrix(j);
         
-        for (int m = 0; m < jack.getRowDimension(); m ++) {
-            jack.setEntry(m, 0, patel(0, x[m]));
-            jack.setEntry(m, 1, patel(1, x[m]));
-            jack.setEntry(m, 2, patel(2, x[m]));
+        for (int m = 0; m < Jacobi.getRowDimension(); m ++) {
+            Jacobi.setEntry(m, 0, patel(0, x[m]));
+            Jacobi.setEntry(m, 1, patel(1, x[m]));
+            Jacobi.setEntry(m, 2, patel(2, x[m]));
         }
-        
-        System.out.println(jack);
+        qr_fact_househ qrfact = qr_fact_househ(Jacobi);
+        System.out.println(Jacobi);
     }
     
     public static void gn_exp() {
