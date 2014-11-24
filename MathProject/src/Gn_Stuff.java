@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
+import org.apache.commons.math3.linear.*;
 
 public class Gn_Stuff {
 
@@ -26,13 +27,15 @@ public class Gn_Stuff {
         }
         
         System.out.println("Guess the parameter A");
-        double parameterA = scan.nextDouble();
+        double a0 = scan.nextDouble();
 
         System.out.println("Guess the parameter B");
-        double parameterB = scan.nextDouble();
+        double b0 = scan.nextDouble();
         
         System.out.println("Guess the paraneter C");
-        double parameterC = scan.nextDouble();
+        double c0 = scan.nextDouble();
+        
+        RealVector beta = new ArrayRealVector(new double[] {a0,b0,c0});
 
         System.out.println("Guess the number of iterations");
         double numberOfIterations = scan.nextDouble();
@@ -58,13 +61,15 @@ public class Gn_Stuff {
         }
         
         System.out.println("Guess the parameter A");
-        double parameterA = scan.nextDouble();
+        double a0 = scan.nextDouble();
 
         System.out.println("Guess the parameter B");
-        double parameterB = scan.nextDouble();
+        double b0 = scan.nextDouble();
         
         System.out.println("Guess the paraneter C");
-        double parameterC = scan.nextDouble();
+        double c0 = scan.nextDouble();
+        
+        RealVector beta = new ArrayRealVector(new double[] {a0,b0,c0});
 
         System.out.println("Guess the number of iterations");
         double numberOfIterations = scan.nextDouble();
@@ -90,14 +95,16 @@ public class Gn_Stuff {
         }
         
         System.out.println("Guess the parameter A");
-        double parameterA = scan.nextDouble();
+        double a0 = scan.nextDouble();
 
         System.out.println("Guess the parameter B");
-        double parameterB = scan.nextDouble();
+        double b0 = scan.nextDouble();
         
         System.out.println("Guess the paraneter C");
-        double parameterC = scan.nextDouble();
-
+        double c0 = scan.nextDouble();
+        
+        RealVector beta = new ArrayRealVector(new double[] {a0,b0,c0});
+        
         System.out.println("Guess the number of iterations");
         double numberOfIterations = scan.nextDouble();
     }
@@ -122,13 +129,15 @@ public class Gn_Stuff {
         }
         
         System.out.println("Guess the parameter A");
-        double parameterA = scan.nextDouble();
+        double a0 = scan.nextDouble();
 
         System.out.println("Guess the parameter B");
-        double parameterB = scan.nextDouble();
+        double b0 = scan.nextDouble();
         
         System.out.println("Guess the paraneter C");
-        double parameterC = scan.nextDouble();
+        double c0 = scan.nextDouble();
+        
+        RealVector beta = new ArrayRealVector(new double[] {a0,b0,c0});
 
         System.out.println("Guess the number of iterations");
         double numberOfIterations = scan.nextDouble();
