@@ -84,7 +84,7 @@ public class Gn_Stuff {
         return fail;
     }
 
-    public static void gn_qua() {
+    public static RealVector gn_qua() {
         Scanner scan = new Scanner(System.in);
         System.out.println("Input Filename:");
         String fileName = scan.nextLine();
@@ -132,33 +132,39 @@ public class Gn_Stuff {
         System.out.println("Guess the paraneter C");
         double c0 = scan.nextDouble();
         
-        RealVector beta = new ArrayRealVector(new double[] {a0,b0,c0});
+        RealVector Beta = new ArrayRealVector(new double[] {a0,b0,c0});
 
         System.out.println("Guess the number of iterations");
         double numberOfIterations = scan.nextDouble();
         
-        double[] residual = new double[x.length];
-        for (int n = 0; n < x.length; n++) {
-            residual[n] = y[n] - equationQua(a0, b0, c0, x[n]);
+        for (int iter = 0; iter < numberOfIterations; iter++) {
+            double[] residual = new double[x.length];
+            for (int n = 0; n < x.length; n++) {
+                residual[n] = y[n] - equationQua(Beta.getEntry(0), Beta.getEntry(1), Beta.getEntry(2), x[n]);
+            }
+            RealVector Res = new ArrayRealVector(residual);
+            double[][] j = new double[residual.length][3];
+            RealMatrix Jacobi = new Array2DRowRealMatrix(j);
+            
+            for (int m = 0; m < Jacobi.getRowDimension(); m ++) {
+                Jacobi.setEntry(m, 0, partialQua(0, x[m]));
+                Jacobi.setEntry(m, 1, partialQua(1, x[m]));
+                Jacobi.setEntry(m, 2, partialQua(2, x[m]));
+            }
+            qr_fact_househ qrfact = new qr_fact_househ(Jacobi);
+            RealMatrix R = qrfact.getR();
+            RealMatrix Q = qrfact.getQ();
+            RealMatrix Rinv = mathproject.isabella(R);
+            RealMatrix Qt = Q.transpose();
+            RealMatrix RQ = Rinv.multiply(Qt);
+            
+            Beta = Beta.subtract(RQ.operate(Res));
         }
-        RealVector Res = new ArrayRealVector(residual);
-        double[][] j = new double[residual.length][3];
-        RealMatrix Jacobi = new Array2DRowRealMatrix(j);
-        
-        for (int m = 0; m < Jacobi.getRowDimension(); m ++) {
-            Jacobi.setEntry(m, 0, partialQua(0, x[m]));
-            Jacobi.setEntry(m, 1, partialQua(1, x[m]));
-            Jacobi.setEntry(m, 2, partialQua(2, x[m]));
-        }
-        //not finished
-        qr_fact_househ qrfact = new qr_fact_househ(Jacobi);
-        RealMatrix R = qrfact.getR();
-        RealMatrix Q = qrfact.getQ();
-        
-        System.out.println(Jacobi);
+        System.out.println("Beta: " + Beta);
+        return Beta;
     }
     
-    public static void gn_exp() {
+    public static RealVector gn_exp() {
         Scanner scan = new Scanner(System.in);
         System.out.println("Input Filename:");
         String fileName = scan.nextLine();
@@ -170,7 +176,7 @@ public class Gn_Stuff {
             String temp;
             while((temp = in.readLine())!= null) {
                 str = str + temp;
-                str = str + " ";
+                str = str + ",";
             }
             in.close();
         } catch (IOException e) {
@@ -206,31 +212,39 @@ public class Gn_Stuff {
         System.out.println("Guess the paraneter C");
         double c0 = scan.nextDouble();
         
-        RealVector beta = new ArrayRealVector(new double[] {a0,b0,c0});
+        RealVector Beta = new ArrayRealVector(new double[] {a0,b0,c0});
 
         System.out.println("Guess the number of iterations");
         double numberOfIterations = scan.nextDouble();
         
-        double[] residual = new double[x.length];
-        for (int n = 0; n < x.length; n++) {
-            residual[n] = y[n] - equationExp(a0, b0, c0, x[n]);
+        for (int iter = 0; iter < numberOfIterations; iter++) {
+            double[] residual = new double[x.length];
+            for (int n = 0; n < x.length; n++) {
+                residual[n] = y[n] - equationExp(Beta.getEntry(0), Beta.getEntry(1), Beta.getEntry(2), x[n]);
+            }
+            RealVector Res = new ArrayRealVector(residual);
+            double[][] j = new double[residual.length][3];
+            RealMatrix Jacobi = new Array2DRowRealMatrix(j);
+            
+            for (int m = 0; m < Jacobi.getRowDimension(); m ++) {
+                Jacobi.setEntry(m, 0, partialExp(0, x[m], Beta.getEntry(1), Beta.getEntry(0)));
+                Jacobi.setEntry(m, 1, partialExp(1, x[m], Beta.getEntry(1), Beta.getEntry(0)));
+                Jacobi.setEntry(m, 2, partialExp(2, x[m], Beta.getEntry(1), Beta.getEntry(0)));
+            }
+            qr_fact_househ qrfact = new qr_fact_househ(Jacobi);
+            RealMatrix R = qrfact.getR();
+            RealMatrix Q = qrfact.getQ();
+            RealMatrix Rinv = mathproject.isabella(R);
+            RealMatrix Qt = Q.transpose();
+            RealMatrix RQ = Rinv.multiply(Qt);
+            
+            Beta = Beta.subtract(RQ.operate(Res));
         }
-        RealVector Res = new ArrayRealVector(residual);
-        double[][] j = new double[residual.length][3];
-        RealMatrix Jacobi = new Array2DRowRealMatrix(j);
-        
-        for (int m = 0; m < Jacobi.getRowDimension(); m ++) {
-            Jacobi.setEntry(m, 0, partialExp(0, x[m], b0, a0));
-            Jacobi.setEntry(m, 1, partialExp(1, x[m], b0, a0));
-            Jacobi.setEntry(m, 2, partialExp(2, x[m], b0, a0));
-        }
-        //nothing finished after this
-        qr_fact_househ qrfact = new qr_fact_househ(Jacobi);
-        RealMatrix R = qrfact.getR();
-        RealMatrix Q = qrfact.getQ();
+        System.out.println("Beta: " + Beta);
+        return Beta;
     }
     
-    public static void gn_log() {
+    public static RealVector gn_log() {
         Scanner scan = new Scanner(System.in);
         System.out.println("Input Filename:");
         String fileName = scan.nextLine();
@@ -242,7 +256,7 @@ public class Gn_Stuff {
             String temp;
             while((temp = in.readLine())!= null) {
                 str = str + temp;
-                str = str + " ";
+                str = str + ",";
             }
             in.close();
         } catch (IOException e) {
@@ -278,31 +292,39 @@ public class Gn_Stuff {
         System.out.println("Guess the paraneter C");
         double c0 = scan.nextDouble();
         
-        RealVector beta = new ArrayRealVector(new double[] {a0,b0,c0});
+        RealVector Beta = new ArrayRealVector(new double[] {a0,b0,c0});
         
         System.out.println("Guess the number of iterations");
         double numberOfIterations = scan.nextDouble();
         
-        double[] residual = new double[x.length];
-        for (int n = 0; n < x.length; n++) {
-            residual[n] = y[n] - equationLog(a0, b0, c0, x[n]);
+        for (int iter = 0; iter < numberOfIterations; iter++) {
+            double[] residual = new double[x.length];
+            for (int n = 0; n < x.length; n++) {
+                residual[n] = y[n] - equationLog(Beta.getEntry(0), Beta.getEntry(1), Beta.getEntry(2), x[n]);
+            }
+            RealVector Res = new ArrayRealVector(residual);
+            double[][] j = new double[residual.length][3];
+            RealMatrix Jacobi = new Array2DRowRealMatrix(j);
+            
+            for (int m = 0; m < Jacobi.getRowDimension(); m ++) {
+                Jacobi.setEntry(m, 0, partialLog(0, x[m], Beta.getEntry(1), Beta.getEntry(0)));
+                Jacobi.setEntry(m, 1, partialLog(1, x[m], Beta.getEntry(1), Beta.getEntry(0)));
+                Jacobi.setEntry(m, 2, partialLog(2, x[m], b0, a0));
+            }
+            qr_fact_househ qrfact = new qr_fact_househ(Jacobi);
+            RealMatrix R = qrfact.getR();
+            RealMatrix Q = qrfact.getQ();
+            RealMatrix Rinv = mathproject.isabella(R);
+            RealMatrix Qt = Q.transpose();
+            RealMatrix RQ = Rinv.multiply(Qt);
+            
+            Beta = Beta.subtract(RQ.operate(Res));
         }
-        RealVector Res = new ArrayRealVector(residual);
-        double[][] j = new double[residual.length][3];
-        RealMatrix Jacobi = new Array2DRowRealMatrix(j);
-        
-        for (int m = 0; m < Jacobi.getRowDimension(); m ++) {
-            Jacobi.setEntry(m, 0, partialLog(0, x[m], b0, a0));
-            Jacobi.setEntry(m, 1, partialLog(1, x[m], b0, a0));
-            Jacobi.setEntry(m, 2, partialLog(2, x[m], b0, a0));
-        }
-        //nothing finished after this
-        qr_fact_househ qrfact = new qr_fact_househ(Jacobi);
-        RealMatrix R = qrfact.getR();
-        RealMatrix Q = qrfact.getQ();
+        System.out.println("Beta: " + Beta);
+        return Beta;
     }
     
-    public static void gn_rat() {
+    public static RealVector gn_rat() {
         Scanner scan = new Scanner(System.in);
         System.out.println("Input Filename:");
         String fileName = scan.nextLine();
@@ -314,7 +336,7 @@ public class Gn_Stuff {
             String temp;
             while((temp = in.readLine())!= null) {
                 str = str + temp;
-                str = str + " ";
+                str = str + ",";
             }
             in.close();
         } catch (IOException e) {
@@ -350,31 +372,39 @@ public class Gn_Stuff {
         System.out.println("Guess the paraneter C");
         double c0 = scan.nextDouble();
         
-        RealVector beta = new ArrayRealVector(new double[] {a0,b0,c0});
+        RealVector Beta = new ArrayRealVector(new double[] {a0,b0,c0});
 
         System.out.println("Guess the number of iterations");
         double numberOfIterations = scan.nextDouble();
         
-        double[] residual = new double[x.length];
-        for (int n = 0; n < x.length; n++) {
-            residual[n] = y[n] - equationRat(a0, b0, c0, x[n]);
+        for (int iter = 0; iter < numberOfIterations; iter++) {
+            double[] residual = new double[x.length];
+            for (int n = 0; n < x.length; n++) {
+                residual[n] = y[n] - equationRat(Beta.getEntry(0), Beta.getEntry(1), Beta.getEntry(2), x[n]);
+            }
+            RealVector Res = new ArrayRealVector(residual);
+            double[][] j = new double[residual.length][3];
+            RealMatrix Jacobi = new Array2DRowRealMatrix(j);
+            
+            for (int m = 0; m < Jacobi.getRowDimension(); m ++) {
+                Jacobi.setEntry(m, 0, partialRat(0, x[m], Beta.getEntry(1), Beta.getEntry(0)));
+                Jacobi.setEntry(m, 1, partialRat(1, x[m], Beta.getEntry(1), Beta.getEntry(0)));
+                Jacobi.setEntry(m, 2, partialRat(2, x[m], Beta.getEntry(1), Beta.getEntry(0)));
+            }
+            qr_fact_househ qrfact = new qr_fact_househ(Jacobi);
+            RealMatrix R = qrfact.getR();
+            RealMatrix Q = qrfact.getQ();
+            RealMatrix Rinv = mathproject.isabella(R);
+            RealMatrix Qt = Q.transpose();
+            RealMatrix RQ = Rinv.multiply(Qt);
+            
+            Beta = Beta.subtract(RQ.operate(Res));
         }
-        RealVector Res = new ArrayRealVector(residual);
-        double[][] j = new double[residual.length][3];
-        RealMatrix Jacobi = new Array2DRowRealMatrix(j);
-        
-        for (int m = 0; m < Jacobi.getRowDimension(); m ++) {
-            Jacobi.setEntry(m, 0, partialRat(0, x[m], b0, a0));
-            Jacobi.setEntry(m, 1, partialRat(1, x[m], b0, a0));
-            Jacobi.setEntry(m, 2, partialRat(2, x[m], b0, a0));
-        }
-        //nothing finished after this
-        qr_fact_househ qrfact = new qr_fact_househ(Jacobi);
-        RealMatrix R = qrfact.getR();
-        RealMatrix Q = qrfact.getQ();
+        System.out.println("Beta: " + Beta);
+        return Beta;
     }
     
     public static void main(String[] args) {
-        gn_qua();
+        gn_log();
     }
 }

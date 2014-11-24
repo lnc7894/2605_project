@@ -24,11 +24,11 @@ public class qr_fact_househ {
         }
         for (int top = 0; top < inc; top++) { // first entry of the matrix/vector
             // zero out the stuff above top
-            System.out.println("top: " + top);
-            System.out.println("index: " + index);
-            System.out.println("Matrix A: " + An);
+            //System.out.println("top: " + top);
+            //System.out.println("index: " + index);
+            //System.out.println("Matrix A: " + An);
             RealVector subMatrix = An.getColumnVector(top);
-            System.out.println("submatrix: " + subMatrix);
+            //System.out.println("submatrix: " + subMatrix);
             if (index < top) {
                 for (int zero = 0; zero < top; zero++) {
                     subMatrix.setEntry(zero, 0);
@@ -36,19 +36,19 @@ public class qr_fact_househ {
                 index++;
             }
             double magSubMatrix = mathproject.magnitude(subMatrix);
-            System.out.println("magnitude: " + magSubMatrix);
+            //System.out.println("magnitude: " + magSubMatrix);
             if (subMatrix.getEntry(top) <= 0) {
                 //subMatrixB[0] = subMatrix[0] + magSubMatrix;
                 subMatrix.addToEntry(top, magSubMatrix);
             } else {
                 subMatrix.addToEntry(top, -magSubMatrix);
             }
-            System.out.println("submatrix after addition: " + subMatrix);
+            //System.out.println("submatrix after addition: " + subMatrix);
             RealVector bVect = subMatrix.mapDivide(magSubMatrix);
-            System.out.println("b vector: " + bVect);
+            //System.out.println("b vector: " + bVect);
             double bMag = mathproject.magnitude(bVect);
             RealVector unit = bVect.mapDivide(bMag);
-            System.out.println("unit vector: " + unit);
+            //System.out.println("unit vector: " + unit);
             int unitLength = unit.getDimension();
             double[][] M = new double[unitLength][unitLength];
             for(int j = 0; j < unitLength; j++) {
@@ -71,11 +71,11 @@ public class qr_fact_househ {
 //            }
             HHunit = HHunit.scalarMultiply(2);
             Hn = I.subtract(HHunit);
-            System.out.println("Hn after iteration: " +Hn);
+            //System.out.println("Hn after iteration: " +Hn);
             An = Hn.multiply(An);
-            System.out.println("An: " + An);
+            //System.out.println("An: " + An);
             H = H.multiply(Hn);
-            System.out.println("H: " + H);
+            //System.out.println("H: " + H);
         }
         Qi = H;
         Ri = An;

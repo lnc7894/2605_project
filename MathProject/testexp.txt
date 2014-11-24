@@ -1,0 +1,164 @@
+import java.util.Arrays;
+public class Vector {
+
+    private double[] vector;
+    private int r;
+
+    public Vector (double[] vector) {
+        this.vector = vector;
+        r = vector.length;
+    }
+    /*
+     * Checks equality of two vectors 
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (null == o) return false;
+        if (this == o) return true;
+        if (!(o instanceof Vector)) return false;
+        Vector that = (Vector) o;
+        return Arrays.equals(this.getArray(), that.getArray());
+    }
+    /*
+     * Returns backing array
+     */
+    public double[] getArray() {
+        return vector;
+    }
+    /*
+     * Returns the zero vector in the rth dimension
+     */
+    public static Vector zeroVector(int r) {
+        double[] zeroVector = new double[r];
+        for (int i = 0; i < r; i++) {
+            zeroVector[i] = 0;
+        }
+        return new Vector(zeroVector);
+    }
+    /*
+     * Returns a legible string representation of the vector
+     */
+    @Override
+    public String toString() {        
+        return Arrays.toString(this.getArray());
+    }
+    /*
+     * Returns the dimension of the vector
+     */
+    public int getR() {
+        return r;
+    }
+    /*
+     * Gets a single coordinate from the vector
+     */
+    public double getCoord(int index) {
+        return vector[index];
+    }
+    /*
+     * Sets a coordinate in the vector
+     */
+    public void setCoord(int index, double value) {
+        vector[index] = value;
+    }
+    /*
+     * Dots two vectors
+     */
+    public double dotProduct(Vector b) {
+        if (this.getR()!=b.getR()) {
+            throw new IllegalArgumentException("You can't dot Vectors with different dimensions");
+        }
+        double dotProduct = 0;
+        for (int i = 0; i < this.r; i++) {
+            dotProduct += this.getCoord(i) * b.getCoord(i);
+        }
+        return dotProduct;
+    }
+    /*
+     * Crosses two vectors
+     */
+    public Vector crossProduct(Vector b) {
+        if (this.getR()!=b.getR() && this.getR()!=3) {
+            throw new IllegalArgumentException("You can't cross Vectors that aren't in R3");
+        }
+        double[] crossProduct = new double[3];
+        crossProduct[0] = this.getCoord(1)*b.getCoord(2)-b.getCoord(1)*this.getCoord(2);
+        crossProduct[1] = -1*(this.getCoord(0)*b.getCoord(2)-b.getCoord(0)*this.getCoord(2));
+        crossProduct[2] = this.getCoord(0)*b.getCoord(1)-b.getCoord(0)*this.getCoord(1);
+        Vector toRetun = new Vector(crossProduct);
+        return toRetun;        
+    }
+    /*
+     * Sums two vectors
+     */
+    public Vector add(Vector b) {
+        if (this.getR()!=b.getR() && this.getR()!=3) {
+            throw new IllegalArgumentException("You can't add Vectors with different dimensions");
+        }
+        double sum[] = new double[this.getR()];
+        for (int i = 0; i < sum.length; i++) {
+            sum[i] = this.getCoord(i) + b.getCoord(i);
+        }
+        Vector toRetun = new Vector(sum);
+        return toRetun;
+    }
+    /*
+     * Subtracts two vectors
+     */
+    public Vector subtract(Vector b) {
+        if (this.getR()!=b.getR() && this.getR()!=3) {
+            throw new IllegalArgumentException("You can't subtract Vectors with different dimensions");
+        }
+        double diff[] = new double[this.getR()];
+        for (int i = 0; i < diff.length; i++) {
+            diff[i] = this.getCoord(i) - b.getCoord(i);
+        }
+        Vector toRetun = new Vector(diff);
+        return toRetun;
+    }
+    /*
+     * Returns the magnitude of a vector
+     */
+    public double magnitude() {        
+        return Math.sqrt(this.dotProduct(this));    
+    }
+    
+    /*
+     * Normalizes a vector
+     */
+    public Vector normalize() {
+        if (this.equals(Vector.zeroVector(this.getR()))) {
+            return this;
+        }
+        return this.scale(1.0 / this.magnitude());
+    }
+    /*
+     * Scales the vector
+     */
+    public Vector scale(double scaleFactor) {
+        double[] scaledVector = new double[r];
+        for (int i = 0; i < r; i++) {
+            scaledVector[i] = vector[i] * scaleFactor;
+        }
+        return new Vector(scaledVector);
+    }
+    /*
+     * Multiplies a vector by its transpose and returns a matrix
+     */
+    public Matrix transpose(Vector u) {
+        if (this.getR() != u.getR()) {
+            throw new IllegalArgumentException("Can't transpose two vectors in different dimmensions");
+        }
+        Matrix result = new Matrix(new double[this.getR()][u.getR()]);
+        for (int i = 0; i < result.getN(); i++) {
+            for (int j = 0; j < result.getM(); j++) {
+                result.setij(j, i, u.getCoord(i));
+            }
+        }
+        for (int i = 0; i < result.getN(); i++) {
+            for (int j = 0; j < result.getM(); j++) {
+                result.setij(i, j, this.getCoord(i) * result.getij(i, j));
+            }
+        }
+        return result;
+    }
+}
