@@ -1,8 +1,4 @@
 import org.apache.commons.math3.linear.*;
-
-import java.io.FileNotFoundException;
-import java.util.Random;
-import java.util.Scanner;
 public class mathproject {
 	/**
 	 * Power Method
