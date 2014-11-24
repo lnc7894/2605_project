@@ -19,7 +19,7 @@ public class Gn_Stuff {
     }
     
     public static double equationLog(double a, double b, double c, double x) {
-        double value = (a*(Math.log10(b + x)) + c);
+        double value = (a*(Math.log(b + x)) + c);
         return value;
     }
     
@@ -58,10 +58,10 @@ public class Gn_Stuff {
     
     public static double partialLog(int i, double x, double b, double a) {
         if (i == 0) {
-            return -(Math.log10(b + x));
+            return -(Math.log(b + x));
         }
         if (i == 1) {
-            return -(a/((Math.log(10))*(b + x)));
+            return -(a/(b + x));
         }
         if (i == 2) {
             return -1;
@@ -209,7 +209,7 @@ public class Gn_Stuff {
         System.out.println("Guess the parameter B");
         double b0 = scan.nextDouble();
         
-        System.out.println("Guess the paraneter C");
+        System.out.println("Guess the parameter C");
         double c0 = scan.nextDouble();
         
         RealVector Beta = new ArrayRealVector(new double[] {a0,b0,c0});
@@ -223,6 +223,7 @@ public class Gn_Stuff {
                 residual[n] = y[n] - equationExp(Beta.getEntry(0), Beta.getEntry(1), Beta.getEntry(2), x[n]);
             }
             RealVector Res = new ArrayRealVector(residual);
+            System.out.println("Residual Vector: " + Res);
             double[][] j = new double[residual.length][3];
             RealMatrix Jacobi = new Array2DRowRealMatrix(j);
             
@@ -231,12 +232,18 @@ public class Gn_Stuff {
                 Jacobi.setEntry(m, 1, partialExp(1, x[m], Beta.getEntry(1), Beta.getEntry(0)));
                 Jacobi.setEntry(m, 2, partialExp(2, x[m], Beta.getEntry(1), Beta.getEntry(0)));
             }
+            System.out.println("Jacobi (after vals): " + Jacobi);
             qr_fact_househ qrfact = new qr_fact_househ(Jacobi);
             RealMatrix R = qrfact.getR();
             RealMatrix Q = qrfact.getQ();
+            System.out.println("R: " + R);
+            System.out.println("Q: " + Q);
             RealMatrix Rinv = mathproject.isabella(R);
             RealMatrix Qt = Q.transpose();
             RealMatrix RQ = Rinv.multiply(Qt);
+            System.out.println("R inverse: " + Rinv);
+            System.out.println("Q transpose: " + Qt);
+            System.out.println("The multiples of Rinv and Qt: " + RQ);
             
             Beta = Beta.subtract(RQ.operate(Res));
         }
@@ -289,7 +296,7 @@ public class Gn_Stuff {
         System.out.println("Guess the parameter B");
         double b0 = scan.nextDouble();
         
-        System.out.println("Guess the paraneter C");
+        System.out.println("Guess the parameter C");
         double c0 = scan.nextDouble();
         
         RealVector Beta = new ArrayRealVector(new double[] {a0,b0,c0});
@@ -369,7 +376,7 @@ public class Gn_Stuff {
         System.out.println("Guess the parameter B");
         double b0 = scan.nextDouble();
         
-        System.out.println("Guess the paraneter C");
+        System.out.println("Guess the parameter C");
         double c0 = scan.nextDouble();
         
         RealVector Beta = new ArrayRealVector(new double[] {a0,b0,c0});
@@ -405,6 +412,6 @@ public class Gn_Stuff {
     }
     
     public static void main(String[] args) {
-        gn_log();
+        gn_exp();
     }
 }
