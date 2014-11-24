@@ -28,10 +28,9 @@ public class mathproject {
             v = b.operate(y);
             //System.out.println(v);
             //System.out.println("Iteration" + " " + numIterations);
-            numIterations++;
         	double Evalue = v.dotProduct(y) / prevV.dotProduct(y);
         	//System.out.println("Eigenvalue" + " " + Evalue);
-        	if (Evalue - prevEvalue <= epsilon & i > 1) {
+        	if (Evalue - prevEvalue <= epsilon && i > 1) {
         		// when the method has worked
         	    prevEvalue = Evalue;
         	    //numIterations = i;
@@ -43,27 +42,12 @@ public class mathproject {
         	    prevEvalue = Evalue;
         	    prevV = v;
         	}
+            numIterations++;
             //System.out.println();
     	}
 		return null; // should never reach this
     	
     }
-
-    /*public static void thousandGen() {
-        for (int i = 0; i < 1000; i++) {
-            Random rand = new Random();
-            double ii = rand.nextDouble() * 4 - 2;
-            double ij = rand.nextDouble() * 4 - 2;
-            double ji = rand.nextDouble() * 4 - 2;
-            double jj = rand.nextDouble() * 4 - 2;
-            double[][] matrix = {{ii, ij}, {ji, jj}};
-            double[] vector = {1, 0};
-            PowerReturn aReturn = power_method(matrix, vector, .00005, 100);
-            double absEValueMax = Math.abs(aReturn.getValue()); // this is part b bullet 2
-            matrix = inverse(matrix);
-            double absEValueMin = Math.abs(power_method(matrix, vector, .00005, 100).getValue()); // this is part b bullet 3
-        }
-    }*/
 
     /**
      * Finds Inverse of a 2x2
@@ -83,45 +67,6 @@ public class mathproject {
         return matrix;
     }
 
-    public void gn_qua() { //not void, just void for now
-        Scanner scan = new Scanner(System.in);
-        //forgot how to do text files
-//        try {
-//            
-//        }
-//        catch (FileNotFoundException e) {
-//            System.out.println(e);
-//        }
-        //prompt user for guesses
-        System.out.println("Enter initial guesses for a, b, c");
-        double a = scan.nextDouble();
-        double b = scan.nextDouble();
-        double c = scan.nextDouble();
-        
-        // get number of iterations
-        System.out.println("Enter number of iterations");
-        int iter = scan.nextInt();
-        
-//        double[] beta = {a,b,c};
-//        RealVector Beta = new ArrayRealVector(beta);
-//        // x is in the list of points we get from the folks
-//        double[] P = {0}; // list of points we get from before. this is wehre we get x from
-//        float x = 0;
-//        double funct = a*(Math.pow(x, 2)) + b*x + c;
-    }
-    
-    public void gn_exp() {
-        
-    }
-    
-    public void gn_log() {
-        // base 10 log
-    }
-    
-    public void gn_rat() {
-        
-    }
-    
     //changed to output RealMatrix
     public static RealMatrix qr_fact_househ(double[][] matrix) {
         //need magnitude
@@ -381,7 +326,7 @@ public class mathproject {
         double[][] matrix = {{1,0,1},{0,1,1},{6,0,2},{4,3,2}};
         //double[][] matrix = {{1,0},{0,1},{6,0}};
         double[] vect = {1,0};
-        System.out.println("M stuff idk : " + qr_fact_givens(matrix));
+        //System.out.println("M stuff idk : " + qr_fact_givens(matrix));
         //thousandGen();
         //System.out.println("Iterations: " + power_method(matrix, vect, eps, iter).getIterations());
         //System.out.println("Eigenvalue: " + power_method(matrix, vect, eps, iter).getValue());
