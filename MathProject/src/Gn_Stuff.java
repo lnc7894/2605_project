@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
+
 import org.apache.commons.math3.linear.*;
 
 public class Gn_Stuff {
@@ -19,9 +20,29 @@ public class Gn_Stuff {
             String temp;
             while((temp = in.readLine())!= null) {
                 str = str + temp;
-                str = str + " ";
+                str = str + ",";
             }
             in.close();
+            //System.out.println(str);
+            String[] s1 = str.split(",");
+            double[] d1 = new double[s1.length];
+            int i = 0;
+            for (String s : s1) {
+                d1[i] = Double.parseDouble(s);
+                i++;
+            }
+            double[] x = new double[d1.length / 2];
+            double[] y = new double[d1.length / 2];
+            int k = 0;
+            for (int j = 0; j < x.length; j++) {
+                x[j] = d1[k];
+                k += 2;
+            }
+            k = 1;
+            for (int j1 = 0; j1 < y.length; j1++) {
+                y[j1] = d1[k];
+                k += 2;
+            }
         } catch (IOException e) {
             e.printStackTrace();;
         }
