@@ -12,7 +12,7 @@ public class ScatterPlots extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Application.launch(ScatterPlots.class, args);
+        Application.launch(ScatterPlots.class, args);    
     }
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -51,6 +51,7 @@ public class ScatterPlots extends Application {
 
             // Matrix 
             PowerReturn aReturn = mathproject.power_method(matrix, vector, .00005, 100);
+
             if (aReturn != null) {
                 double absEValueMax = Math.abs(aReturn.getValue()); // this is part b bullet 2
             }
@@ -95,7 +96,7 @@ public class ScatterPlots extends Application {
         new CreateStage(detInverseData, traceInverseData, iterationsInverse);
     }
 
-    class CreateStage {
+    public class CreateStage {
 
         @SuppressWarnings({ "rawtypes", "unchecked" })
 		public CreateStage(double[] dI, double[] tI, double[] iI) {
