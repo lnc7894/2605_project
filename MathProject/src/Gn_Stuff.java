@@ -160,7 +160,6 @@ public class Gn_Stuff {
             
             Beta = Beta.subtract(RQ.operate(Res));
         }
-        System.out.println("Beta: " + Beta);
         return Beta;
     }
     
@@ -240,7 +239,6 @@ public class Gn_Stuff {
             
             Beta = Beta.subtract(RQ.operate(Res));
         }
-        System.out.println("Beta: " + Beta);
         return Beta;
     }
     
@@ -320,7 +318,6 @@ public class Gn_Stuff {
             
             Beta = Beta.subtract(RQ.operate(Res));
         }
-        System.out.println("Beta: " + Beta);
         return Beta;
     }
     
@@ -400,12 +397,6 @@ public class Gn_Stuff {
             
             Beta = Beta.subtract(RQ.operate(Res));
         }
-        System.out.println("Beta: " + Beta);
         return Beta;
-    }
-    
-    public static void main(String[] args) {
-        RealVector v = gn_exp();
-        System.out.println(v);
     }
 }

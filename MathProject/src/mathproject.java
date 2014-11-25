@@ -21,16 +21,9 @@ public class mathproject {
     	double prevEvalue = 0;
     	int numIterations = 1;
     	for(int i = 0; i <= iterations - 1; i++) {
-    	    //System.out.println(a);
-    	    //System.out.println(b);
     	    b = b.multiply(a);
-    	    //System.out.println(b);
-    	    //System.out.println(v);
             v = b.operate(y);
-            //System.out.println(v);
-            //System.out.println("Iteration" + " " + numIterations);
         	double Evalue = v.dotProduct(y) / prevV.dotProduct(y);
-        	//System.out.println("Eigenvalue" + " " + Evalue);
         	if (Evalue - prevEvalue <= epsilon && i > 1) {
         		// when the method has worked
         	    prevEvalue = Evalue;
@@ -44,9 +37,8 @@ public class mathproject {
         	    prevV = v;
         	}
             numIterations++;
-            //System.out.println();
     	}
-		return null; // should never reach this
+		return null;
     	
     }
 
@@ -66,6 +58,11 @@ public class mathproject {
     	return dianaFinal;
     }
 
+    /**
+     * to find inverse of 3 x3 yo
+     * @param mary
+     * @return
+     */
     public static RealMatrix isabella(RealMatrix mary) {
     	//Stuff to put into Transpose
     	double A = mary.getEntry(1, 1) * mary.getEntry(2, 2) - mary.getEntry(1, 2) * mary.getEntry(2, 1);
@@ -98,7 +95,7 @@ public class mathproject {
     }
 
     /**
-     * Finds Inverse of a 2x2
+     * Finds Inverse of a 2x2 yo
      * @param matrix
      * @return
      */
@@ -126,28 +123,6 @@ public class mathproject {
         }
         return new Array2DRowRealMatrix(identity);
     }
-
-    //okay so i thought i needed this but probably not but if we need it later here we go
-    public double determinant(double[][] matrix) {
-        double det = 0;
-        if (matrix.length != matrix[0].length) {
-            return Double.MAX_VALUE; // not sure if we should throw an exception or not
-        }
-        // when 2x2
-        if (matrix.length == 2 && matrix[0].length == 2) {
-            double a = matrix[0][0];
-            double b = matrix[0][1];
-            double c = matrix[1][0];
-            double d = matrix[1][1];
-            det = 1/((a*d) - (b*c));
-        }
-        
-        // when 3x3 and up
-        if (matrix.length > 2 && matrix[0].length > 2) {
-            // do stuff
-        }
-        return det;
-    }
     
     //check to see if the matrix is mxm
     public static boolean isSquare(RealMatrix matrix) {
@@ -163,13 +138,5 @@ public class mathproject {
         }
         return (double) Math.sqrt(norm);
     }
-    
-    public static void main(String[] args) {
-        double[][] m = {{1,2,3}, {0,5,6}, {0,0,9}};
-        RealMatrix matthew = new Array2DRowRealMatrix(m);
-        System.out.println("Inverse: " + isabella(matthew));
-    }
-    
-    
-    
+
 }
