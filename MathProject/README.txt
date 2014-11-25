@@ -1,6 +1,17 @@
 Imports that we used and did not code/create that were used in this project were: Appachi Commons Math, JavaFX.
 These imports are needed to run the code.
 
+File Manifest For Part 1
+mathproject.java
+Gn_Stuff.java
+qr_fact_givens.java
+qr_fact_househ.java
+
+File Manifest For Part 2
+mathproject.java
+ScatterPlots.java
+PowerReturn.java
+
 Number 2 Part A
 The power_method is located in Mathproject class. It takes in as parameters a 2D double array for the matrix., an double array
 for the vector, a double value for epsilon, and an integer value for the iterations. We have a class named PowerReturn that is 
